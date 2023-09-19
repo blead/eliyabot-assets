@@ -1,0 +1,22 @@
+name: sheets
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: [wf-assets]
+    types: [completed]
+
+jobs:
+  sheets:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    - name: Install requirements
+      run: pip install -r .github/scripts/requirements.txt
+    - name: Run sheets.py
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+        SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
+      run: python .github/scripts/sheets.py
