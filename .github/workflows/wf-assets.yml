@@ -45,6 +45,11 @@ jobs:
         PLAYABLE_CHARS_JSON: eliyabot-assets/processed/playable_chars.json
         PLAYABLE_EQUIPS_JSON: eliyabot-assets/processed/playable_equips.json
       run: python ${GITHUB_WORKSPACE}/eliyabot-assets/.github/scripts/playable.py
+    - name: Run wfarea.py
+      env:
+        PLAYABLE_CHARS_JSON: eliyabot-assets/processed/playable_chars.json
+        WFAREA_JSON: eliyabot-assets/processed/wfarea.json
+      run: python ${GITHUB_WORKSPACE}/eliyabot-assets/.github/scripts/wfarea.py
     - name: Get wf-assets version
       run: echo VERSION=$(git describe --tags --abbrev=0) >> ${GITHUB_ENV}
       working-directory: ./wf-assets
