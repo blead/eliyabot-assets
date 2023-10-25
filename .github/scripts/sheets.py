@@ -6,8 +6,8 @@ import os
 
 SERVICE_ACCOUNT_INFO = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
 SPREADSHEET_ID = os.environ.get("SPREADSHEET_ID")
-CHARS_JSON = os.environ.get("CHARS_JSON", "processed/playable_chars.json")
-EQUIPS_JSON = os.environ.get("EQUIPS_JSON", "processed/playable_equips.json")
+CHARS_JSON = os.environ.get("CHARS_JSON", "processed/playable_characters.json")
+EQUIPS_JSON = os.environ.get("EQUIPS_JSON", "processed/playable_equipments.json")
 
 ATTRIBUTE_EN_TO_JP = {
     "Fire": "火",
