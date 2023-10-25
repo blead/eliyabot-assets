@@ -16,6 +16,7 @@ ATTRIBUTE_EN_TO_JP = {
     "Thunder": "雷",
     "Light": "光",
     "Dark": "闇",
+    "All": "全",
 }
 
 
