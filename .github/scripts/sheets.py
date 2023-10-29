@@ -224,12 +224,17 @@ def update_chars(sheet, spreadsheet_id):
                         )
                     ] = (sheet_name, rownum)
                     updated_cols = []
+                    notesidx = next(i for i, col in enumerate(cols) if col == "Notes")
 
                     for colidx, col in enumerate(cols):
                         col_without_spaces = col.replace(" ", "")
                         if (
-                            col_without_spaces in devname_to_char[devname]
-                            and row[colidx] == ""
+                            col_without_spaces in devname_to_char[devname] and (
+                                row[colidx] == "" or (
+                                    row[notesidx] == "(auto-generated)"
+                                    and row[colidx] != devname_to_char[devname][col_without_spaces]
+                                )
+                            )
                         ):
                             updated_value = devname_to_char[devname][col_without_spaces]
                             if col_without_spaces == "Attribute":
@@ -320,12 +325,17 @@ def update_equips(sheet, spreadsheet_id):
 
                 if devname and devname in devname_to_equip:
                     updated_cols = []
+                    notesidx = next(i for i, col in enumerate(cols) if col == "Boss" or col == "Notes")
 
                     for colidx, col in enumerate(cols):
                         col_without_spaces = col.replace(" ", "")
                         if (
-                            col_without_spaces in devname_to_equip[devname]
-                            and row[colidx] == ""
+                            col_without_spaces in devname_to_equip[devname] and (
+                                row[colidx] == "" or (
+                                    row[notesidx] == "(auto-generated)"
+                                    and row[colidx] != devname_to_equip[devname][col_without_spaces]
+                                )
+                            )
                         ):
                             updated_value = devname_to_equip[devname][
                                 col_without_spaces
