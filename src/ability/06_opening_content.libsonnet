@@ -12,10 +12,9 @@ local keywords = import './keywords.libsonnet';
 
   map(abi, multiplier=100):: {
     value: if abi[2] != '' then std.parseJson(abi[2]) * multiplier,
-    valueStrSigned: if self.value != null then (if self.value == 0 then '+0' else '%+g' % self.value),
+    valueStr: if self.value != null then (if self.value == 0 then '0' else '%g' % self.value),
   },
 
   '':: function(abi) '',
-  '0':: function(abi) 'own EXP received %(valueStrSigned)s%%' % self.map(abi),
-  '2':: function(abi) 'amount of mana dropped %(valueStrSigned)s%%' % self.map(abi),
+  '2':: function(abi) 'amount of mana dropped +%(valueStr)s%%' % self.map(abi),
 }
