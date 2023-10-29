@@ -64,16 +64,25 @@ local everyTime(count) = if count == 1 then 'when ' else 'every %s times ' % cou
   '24':: function(abi) everyTime(self.map(abi).value) + '%(target)s gains a buff, ' % self.map(abi),
   '25':: function(abi) everyTime(self.map(abi).value) + '%(target)s gains an ATK buff, ' % self.map(abi),
   '46':: function(abi) everyTime(self.map(abi).value) + 'party gains penetration buff, ',
+  '48':: function(abi) everyTime(self.map(abi).value) + 'party gains power flip damage buff, ',
   '47':: function(abi) everyTime(self.map(abi).value) + 'party gains float buff, ',
   '52':: function(abi) (
-    if self.map(abi).value == 1 then 'for every %(checkType)s character in the party, '
+    if self.map(abi).rampTimes <= 1 then 'if there are %(value)g or more %(checkType)s characters in the party, '
+    else if self.map(abi).value == 1 then 'for every %(checkType)s character in the party, '
     else if self.map(abi).value == 6 then 'Resonance [%(checkType)s], '
     else 'for every %(value)g %(checkType)s characters in the party, '
   ) % self.map(abi),
   '53':: function(abi) 'if self is a %(checkType)s character, ' % self.map(abi),
-  '55':: function(abi)
-    if self.map(abi).value == 1 then 'for every element among party members, '
-    else 'for every %(value)g elements among party members, ' % self.map(abi),
+  '55':: function(abi) (
+    if self.map(abi).rampTimes <= 1 then 'if there are %(value)g or more elements among party members, '
+    else if self.map(abi).value == 1 then 'for every element among party members, '
+    else 'for every %(value)g elements among party members, '
+  ) % self.map(abi),
+  '56':: function(abi) (
+    if self.map(abi).rampTimes <= 1 then 'if there are %(value)g or more races among party members, '
+    else if self.map(abi).value == 1 then 'for every race among party members, '
+    else 'for every %(value)g races among party members, '
+  ) % self.map(abi),
   '58':: function(abi)
     if self.map(abi).value == 1 then 'every Lv1 power flip, '
     else 'every %(value)g Lv1 power flips, ' % self.map(abi),
@@ -87,16 +96,16 @@ local everyTime(count) = if count == 1 then 'when ' else 'every %s times ' % cou
   '65':: function(abi) 'upon reaching %(value)g combo, ' % self.map(abi),
   '66':: function(abi) 'if leader is a %(checkType)s character, ' % self.map(abi),
   '71':: function(abi) everyTime(self.map(abi).value) + 'fever gauge is increased by abilities, ',
-  '72':: function(abi) (
-    if self.map(abi).rampTimes == 1 then 'after %(value)g seconds, '
-    else 'every %(value)g seconds, '
-  ) % self.map(abi, divisor=6000000),
+  '72':: function(abi)
+    if self.map(abi).value == 1 then 'every 1 second, '
+    else 'every %(value)g seconds, ' % self.map(abi, divisor=6000000),
   '73':: function(abi) 'when %(target)s recovers %(value)g HP or above at once, ' % self.map(abi),
   // 敵がマヒ・スタン効果になる度
   '97':: function(abi) everyTime(self.map(abi).value) + 'an enemy gets paralyze/stun debuff, ',
   '102':: function(abi) everyTime(self.map(abi).value) + '%(targetP)s skill hits, ' % self.map(abi),
   // 敵が1体マヒ・スタン効果になる度
   '126':: self['97'],
+  '132':: function(abi) everyTime(self.map(abi).value) + '%(target)s receives barrier, ' % self.map(abi),
   '133':: function(abi) everyTime(self.map(abi).value) + '%(target)s direct attacks an enemy, ' % self.map(abi),
   '134':: function(abi) everyTime(self.map(abi).value) + '%(target)s becomes a coffin, ' % self.map(abi),
   '136':: function(abi) everyTime(self.map(abi).value) + '%(targetP)s skill gauge is increased by an ability or skill' % self.map(abi),
@@ -109,8 +118,16 @@ local everyTime(count) = if count == 1 then 'when ' else 'every %s times ' % cou
   '191':: function(abi) everyTime(self.map(abi).value) + '[%(multiballGroup)s] disappears, ' % self.map(abi),
   '192':: function(abi) everyTime(self.map(abi).value) + '%(target)s bumps into an enemy, ' % self.map(abi),
   '193':: function(abi) 'if self is the unison character to [%(checkType)s], ' % self.map(abi),
-  '231':: function(abi) 'every %(value2)g seconds of float buff, ' % self.map(abi, divisor=6000000),
+  '231':: function(abi)
+    if self.map(abi).value2 == 1 then 'every 1 second of float buff, '
+    else 'every %(value2)g seconds of float buff, ' % self.map(abi, divisor=6000000),
   '250':: function(abi) 'upon reaching %(value)g combo %(value2)g times, ' % self.map(abi),
+  '252':: function(abi) (
+    if self.map(abi).rampTimes <= 1 then 'if there are %(value)g or more characters with the same element in the party, '
+    else if self.map(abi).value == 1 then 'for every character with the same element in the party, '
+    else if self.map(abi).value == 6 then 'Resonance [Any], '
+    else 'for every %(value)g characters with the same element in the party, '
+  ) % self.map(abi),
   '255':: function(abi)
     if self.map(abi).value == 1 then 'every Lv1 or Lv2 power flip, '
     else 'every %(value)g Lv1 or Lv2 power flips, ' % self.map(abi),

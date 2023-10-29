@@ -52,4 +52,8 @@ local uniqueCondition = import './unique_condition.libsonnet';
   '202':: function(abi) '[Unison] ',
   // duplicate? of target HP <=
   '204':: self['8'],
+  '207':: function(abi) (
+    if self.map(abi).value == 6 then 'Resonance [Any], '
+    else 'if there are %(value)g or more characters with the same element in the party, '
+  ) % self.map(abi),
 }

@@ -79,7 +79,7 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
     + cooldown(mapped.cooldown),
 
   addStats(mapped)::
-    local minRamp = if mapped.triggerId == '52' then 1 else 0;
+    local minRamp = if std.setMember(mapped.triggerId, ['252', '52', '55', '56']) then 1 else 0;
     ' %(valueStrSigned)s%%' % mapped
     + (if mapped.rampTimes > minRamp then ' [MAX: %+g%%]' % (mapped.value * mapped.rampTimes) else '')
     + delay(mapped.delay)
@@ -145,6 +145,11 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
   '40':: function(abi) '%(targetP)s wind resistance' % self.map(abi) + self.addStats(self.map(abi)),
   '41':: function(abi) '%(targetP)s light resistance' % self.map(abi) + self.addStats(self.map(abi)),
   '42':: function(abi) '%(targetP)s dark resistance' % self.map(abi) + self.addStats(self.map(abi)),
+  '43':: function(abi)
+    '%(targetP)s received ell-elemental damage %(valueStrSigned)s' % self.map(abi, divisor=-100000)
+    + delay(self.map(abi).delay)
+    + triggerTimes(self.map(abi).rampTimes)
+    + cooldown(self.map(abi).cooldown),
   '50':: function(abi) '%(targetP)s fever gain from attacks' % self.map(abi) + self.addStats(self.map(abi)),
   '51':: function(abi) '%(targetP)s ease of downing enemies' % self.map(abi) + self.addStats(self.map(abi)),
   '52':: function(abi) '%(targetP)s damage dealt to %(enemyType)s enemies' % self.map(abi) + self.addStats(self.map(abi)),
@@ -152,6 +157,7 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
   '55':: function(abi) 'power flip damage' + self.addStats(self.map(abi)),
   '56':: function(abi) 'fever mode duration' + self.addStats(self.map(abi)),
   '59':: function(abi) '%(target)s immunity to ATK debuff' % self.map(abi),
+  '60':: function(abi) '%(target)s immunity to skill damage debuff' % self.map(abi),
   '62':: function(abi) '%(target)s immunity to fire resistance debuff' % self.map(abi),
   '63':: function(abi) '%(target)s immunity to water resistance debuff' % self.map(abi),
   '64':: function(abi) '%(target)s immunity to thunder resistance debuff' % self.map(abi),
@@ -202,6 +208,7 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
     + delay(self.map(abi).delay)
     + cooldown(self.map(abi).cooldown),
   '201':: function(abi) 'multi-hit (2x/%(valueStrSigned)s%%)' % self.map(abi),
+  '202':: function(abi) 'multi-hit (3x/%(valueStrSigned)s%%)' % self.map(abi),
   '203':: function(abi)
     '%(targetP)s coffin count %(valueStrSigned)s' % self.map(abi, divisor=-100000)
     + delay(self.map(abi).delay)
@@ -367,6 +374,7 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
   '483':: function(abi) "%(multiballType)s multiballs' ATK" % self.map(abi) + self.addStats(self.map(abi)),
   '484':: function(abi) "%(multiballType)s multiballs' direct attack damage" % self.map(abi) + self.addStats(self.map(abi)),
   '485':: function(abi) "%(multiballType)s multiballs' HP" % self.map(abi) + self.addStats(self.map(abi)),
+  '487':: function(abi) '%(targetP)s ability damage buff duration' % self.map(abi) + self.addStats(self.map(abi)),
   '489':: function(abi)
     'grant combo boost buff [combo %(value)+d]' % self.map(abi, divisor=100000)
     + delay(self.map(abi).delay)
