@@ -8,8 +8,8 @@ local Equipment(id, data) = {
   JPName: data[1],
   Rarity: data[11],
   Attribute: elements[souls[id][0][12]],
-  MaxHP: if std.objectHas(equipmentStats[id], '5') then equipmentStats[id]['5'][0][0] else equipmentStats[id]['1'][0][0],
-  MaxATK: if std.objectHas(equipmentStats[id], '5') then equipmentStats[id]['5'][0][1] else equipmentStats[id]['1'][0][1],
+  MaxHP: if '5' in equipmentStats[id] then equipmentStats[id]['5'][0][0] else equipmentStats[id]['1'][0][0],
+  MaxATK: if '5' in equipmentStats[id] then equipmentStats[id]['5'][0][1] else equipmentStats[id]['1'][0][1],
 };
 
 [Equipment(equip.key, equip.value[0]) for equip in std.objectKeysValues(equipments)]
