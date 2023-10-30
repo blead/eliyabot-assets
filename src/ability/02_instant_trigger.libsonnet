@@ -67,9 +67,9 @@ local everyTime(count) = if count == 1 then 'when ' else 'every %s times ' % cou
   '48':: function(abi) everyTime(self.map(abi).value) + 'party gains power flip damage buff, ',
   '47':: function(abi) everyTime(self.map(abi).value) + 'party gains float buff, ',
   '52':: function(abi) (
-    if self.map(abi).rampTimes <= 1 then 'if there are %(value)g or more %(checkType)s characters in the party, '
+    if self.map(abi).value == 6 then 'Resonance [%(checkType)s], '
+    else if self.map(abi).rampTimes <= 1 then 'if there are %(value)g or more %(checkType)s characters in the party, '
     else if self.map(abi).value == 1 then 'for every %(checkType)s character in the party, '
-    else if self.map(abi).value == 6 then 'Resonance [%(checkType)s], '
     else 'for every %(value)g %(checkType)s characters in the party, '
   ) % self.map(abi),
   '53':: function(abi) 'if self is a %(checkType)s character, ' % self.map(abi),
@@ -123,9 +123,9 @@ local everyTime(count) = if count == 1 then 'when ' else 'every %s times ' % cou
     else 'every %(value2)g seconds of float buff, ' % self.map(abi, divisor=6000000),
   '250':: function(abi) 'upon reaching %(value)g combo %(value2)g times, ' % self.map(abi),
   '252':: function(abi) (
-    if self.map(abi).rampTimes <= 1 then 'if there are %(value)g or more characters with the same element in the party, '
+    if self.map(abi).value == 6 then 'Resonance [Any], '
+    else if self.map(abi).rampTimes <= 1 then 'if there are %(value)g or more characters with the same element in the party, '
     else if self.map(abi).value == 1 then 'for every character with the same element in the party, '
-    else if self.map(abi).value == 6 then 'Resonance [Any], '
     else 'for every %(value)g characters with the same element in the party, '
   ) % self.map(abi),
   '255':: function(abi)
