@@ -47,7 +47,6 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
     // https://github.com/google/go-jsonnet/issues/554: '%g' % 0 causes overflow
     valueStr: if self.value != null then (if self.value == 0 then '0' else '%g' % self.value),
     valueStrSigned: if self.value != null then (if self.value == 0 then '+0' else '%+g' % self.value),
-    multiballType: keywords.type(abi[26]),
     value2: if abi[27] != '' then std.parseInt(abi[27]) / divisor,
     value2Str: if self.value2 != null then (if self.value2 == 0 then '0' else '%g' % self.value2),
     buffDurationStr: if abi[31] != '' && abi[31] != '9.999999E11' then
@@ -57,7 +56,7 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
     buffUntilFlip: if abi[35] != '' && abi[35] != '(None)' then std.parseInt(abi[35]) else 0,
     buffUntilFlipEnds: if abi[37] != '' && abi[37] != '(None)' then std.parseInt(abi[37]) else 0,
     buffUntilFlipEndsLv: if abi[38] != '' && abi[38] != '(None)' then std.parseInt(abi[38]) else 0,
-    enemyType: keywords.type(abi[39]),
+    contentTargetType: keywords.type(abi[39]),
     buffUndispellable: abi[40] == '1',
     changeSkill:
       if abi[43] in customAbilityStrings then customAbilityStrings[abi[43]][0][0]
@@ -152,7 +151,7 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
     + cooldown(self.map(abi).cooldown),
   '50':: function(abi) '%(targetP)s fever gain from attacks' % self.map(abi) + self.addStats(self.map(abi)),
   '51':: function(abi) '%(targetP)s ease of downing enemies' % self.map(abi) + self.addStats(self.map(abi)),
-  '52':: function(abi) '%(targetP)s damage dealt to %(enemyType)s enemies' % self.map(abi) + self.addStats(self.map(abi)),
+  '52':: function(abi) '%(targetP)s damage dealt to %(contentTargetType)s enemies' % self.map(abi) + self.addStats(self.map(abi)),
   '53':: function(abi) '%(targetP)s break/down punisher' % self.map(abi) + self.addStats(self.map(abi)),
   '55':: function(abi) 'power flip damage' + self.addStats(self.map(abi)),
   '56':: function(abi) 'fever mode duration' + self.addStats(self.map(abi)),
@@ -371,9 +370,9 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
     + activatesSeparately(self.map(abi).activatesSeparately)
     + triggerTimes(self.map(abi).rampTimes)
     + cooldown(self.map(abi).cooldown),
-  '483':: function(abi) "%(multiballType)s multiballs' ATK" % self.map(abi) + self.addStats(self.map(abi)),
-  '484':: function(abi) "%(multiballType)s multiballs' direct attack damage" % self.map(abi) + self.addStats(self.map(abi)),
-  '485':: function(abi) "%(multiballType)s multiballs' HP" % self.map(abi) + self.addStats(self.map(abi)),
+  '483':: function(abi) "%(contentTargetType)s multiballs' ATK" % self.map(abi) + self.addStats(self.map(abi)),
+  '484':: function(abi) "%(contentTargetType)s multiballs' direct attack damage" % self.map(abi) + self.addStats(self.map(abi)),
+  '485':: function(abi) "%(contentTargetType)s multiballs' HP" % self.map(abi) + self.addStats(self.map(abi)),
   '487':: function(abi) '%(targetP)s ability damage buff duration' % self.map(abi) + self.addStats(self.map(abi)),
   '489':: function(abi)
     'grant combo boost buff [combo %(value)+d]' % self.map(abi, divisor=100000)

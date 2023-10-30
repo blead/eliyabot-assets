@@ -26,7 +26,7 @@ local keywords = import './keywords.libsonnet';
     targetType: keywords.type(abi[13]),
     value: if abi[16] != '' then std.parseInt(abi[16]) / divisor,
     valueStrSigned: if self.value != null then (if self.value == 0 then '+0' else '%+g' % self.value),
-    enemyType: keywords.type(abi[19]),
+    contentTargetType: keywords.type(abi[19]),
   },
 
   addStats(mapped)::
@@ -50,7 +50,7 @@ local keywords = import './keywords.libsonnet';
   '9':: function(abi) '%(targetP)s light resistance' % self.map(abi) + self.addStats(self.map(abi)),
   '10':: function(abi) '%(targetP)s dark resistance' % self.map(abi) + self.addStats(self.map(abi)),
   '18':: function(abi) '%(targetP)s fever gain from attacks' % self.map(abi) + self.addStats(self.map(abi)),
-  '20':: function(abi) '%(targetP)s damage dealt to %(enemyType)s enemies' % self.map(abi) + self.addStats(self.map(abi)),
+  '20':: function(abi) '%(targetP)s damage dealt to %(contentTargetType)s enemies' % self.map(abi) + self.addStats(self.map(abi)),
   '21':: function(abi) '%(targetP)s break/down punisher' % self.map(abi) + self.addStats(self.map(abi)),
   '23':: function(abi) 'power flip damage' + self.addStats(self.map(abi)),
   '26':: function(abi) '%(target)s immunity to ATK debuff' % self.map(abi),
