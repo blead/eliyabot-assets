@@ -53,4 +53,33 @@ local openingContent = import '06_opening_content.libsonnet';
   ),
 
   parseLeaderSkillFormatted(abis):: self.format(std.map(self.parseLeaderSkill, abis)),
+
+  parseEquipment(abi):: self.parse(
+    abi,
+    [
+      precondition.index(3),
+      precondition.index(10),
+      precondition.index(17),
+      instantTrigger.index(24),
+      instantContent.index(24),
+      duringTrigger.index(91),
+      duringContent.index(92),
+      openingContent.index(117),
+    ],
+  ),
+
+  parseEquipmentFormatted(abis)::
+    local ids = [abi[0] for abi in abis];
+    local idCounts = [id for id in std.uniq(ids) if std.count(ids, id) > 1];
+    // local idMap = { [idCounts[i]]: i + 1 for i in std.range(0, std.length(idCounts) - 1) };
+    // local label(abi) = if abi[0] in idMap then '(%d) ' % idMap[abi[0]] else '';
+    
+    // All weapons so far have at most only one enhanced abi in lv3 -> lv5 so we'll hardcode it a bit
+    local enhanced(abi) = if std.setMember(abi[0], idCounts) then 'Awaken Lv3 is enhanced: ' else '';
+
+    {
+      WeaponSkill: std.join(' / ', [$.capitalize($.parseEquipment(abi)) for abi in abis if abi[1] == '1']),
+      AwakenLv3: std.join(' / ', [$.capitalize($.parseEquipment(abi)) for abi in abis if abi[1] == '3']),
+      AwakenLv5: std.join(' / ', [enhanced(abi) + $.capitalize($.parseEquipment(abi)) for abi in abis if abi[1] == '5']),
+    },
 }
