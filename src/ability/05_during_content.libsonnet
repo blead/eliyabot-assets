@@ -9,7 +9,7 @@ local keywords = import './keywords.libsonnet';
 
   parse(abi)::
     if abi[11] in self then self[abi[11]](abi[:20])
-    else '(during content %s not defined) ' % abi[11],
+    else '<during content %s not defined> ' % abi[11],
 
   map(abi, divisor=1000):: {
     local this = self,

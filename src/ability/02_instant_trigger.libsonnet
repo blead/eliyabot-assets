@@ -12,7 +12,7 @@ local everyTime(count) = if count == 1 then 'when ' else 'every %s times ' % cou
 
   parse(abi)::
     if abi[0] in self then self[abi[0]](abi[:21])
-    else '(instant trigger %s not defined) ' % abi[0],
+    else '<instant trigger %s not defined> ' % abi[0],
 
   map(abi, divisor=100000):: {
     local this = self,
@@ -131,4 +131,8 @@ local everyTime(count) = if count == 1 then 'when ' else 'every %s times ' % cou
   '255':: function(abi)
     if self.map(abi).value == 1 then 'every Lv1 or Lv2 power flip, '
     else 'every %(value)g Lv1 or Lv2 power flips, ' % self.map(abi),
+  '256':: function(abi) (
+    if self.map(abi).rampTimes <= 1 then 'when battle begins, if %(target)s exceeds its max skill gauge by %(value)g%%, '
+    else 'when battle begins, for every %(value)g%% skill gauge by which %(target)s exceeds its max skill gauge, '
+  ) % self.map(abi, divisor=1000),
 }

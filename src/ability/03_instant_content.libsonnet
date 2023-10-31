@@ -32,7 +32,7 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
 
   parse(abi)::
     if abi[20] in self then self[abi[20]](abi[:46])
-    else '(instant content %s not defined) ' % abi[20],
+    else '<instant content %s not defined> ' % abi[20],
 
   map(abi, divisor=1000):: {
     local this = self,

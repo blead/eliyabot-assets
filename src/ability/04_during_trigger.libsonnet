@@ -9,7 +9,7 @@ local uniqueCondition = import './unique_condition.libsonnet';
 
   parse(abi)::
     if abi[0] in self then self[abi[0]](abi[:10])
-    else '(during trigger %s not defined) ' % abi[0],
+    else '<during trigger %s not defined> ' % abi[0],
 
   map(abi, divisor=100000):: {
     local this = self,
