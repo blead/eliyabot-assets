@@ -4844,7 +4844,7 @@
     "MaxATK": "100",
     "MaxHP": "500",
     "Rarity": "5",
-    "WeaponSkill": "Resonance [Any], (instant trigger 256 not defined) that character's ATK +1.5% [MAX: +150%]",
+    "WeaponSkill": "Resonance [Any], when battle begins, for every 1% skill gauge by which a party character exceeds its max skill gauge, that character's ATK +1.5% [MAX: +150%]",
     "id": "5090056"
   },
   {
