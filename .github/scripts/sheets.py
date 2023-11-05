@@ -170,6 +170,8 @@ def build_equip_row(rowidx, equip, cols):
                 row.append(
                     f'=IMAGE(CONCATENATE("https://eliya-bot.herokuapp.com/img/assets/item/equipment/",{chr(ord("A")+devname_idx)}{rowidx+1},".png"))'
                 )
+            case "Attribute":
+                row.append(ATTRIBUTE_EN_TO_JP[equip["Attribute"]])
             case "Rarity":
                 row.append(f"{equip['Rarity']}*")
             case "Boss" | "Notes":
@@ -235,6 +237,8 @@ def update_chars(sheet, spreadsheet_id):
                         ):
                             updated_value = devname_to_char[devname][col_without_spaces]
                             if col_without_spaces == "Attribute":
+                                if row[colidx] == ATTRIBUTE_EN_TO_JP[updated_value]:
+                                    continue
                                 updated_value = ATTRIBUTE_EN_TO_JP[updated_value]
                             updated_ranges.append(
                                 {
@@ -335,6 +339,8 @@ def update_equips(sheet, spreadsheet_id):
                                 col_without_spaces
                             ]
                             if col_without_spaces == "Attribute":
+                                if row[colidx] == ATTRIBUTE_EN_TO_JP[updated_value]:
+                                    continue
                                 updated_value = ATTRIBUTE_EN_TO_JP[updated_value]
                             updated_ranges.append(
                                 {
