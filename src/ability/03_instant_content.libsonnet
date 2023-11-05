@@ -1,6 +1,7 @@
 local customAbilityStrings = import '../../../wf-assets/orderedmap/string/custom_ability_string.json';
 local keywords = import './keywords.libsonnet';
 local uniqueCondition = import './unique_condition.libsonnet';
+local utils = import './utils.libsonnet';
 
 local delay(sec) = if sec != '' && sec != '0' then ' after %ss' % sec else '';
 
@@ -24,9 +25,11 @@ local untilFlipEnds(count, level=3) =
 local activatesSeparately(cond) = if cond == 'true' then ' (activates separately for each character)' else '';
 
 {
+  mode:: 'max',
   // id is at [45]
-  index(index=25)::
+  index(index=25, mode='max')::
     self {
+      mode:: mode,
       parse:: function(abi) super.parse(abi[index:]),
     },
 
@@ -38,20 +41,54 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
     local this = self,
     triggerId: abi[0],
     rampTimes: if abi[7] != '' && abi[7] != '(None)' then std.parseInt(abi[7]) else 0,
+    rampedValueStrSigned: if self.minValue != null && self.value != null then (
+      if $.mode == 'min' then utils.formatZeroSigned(self.minValue * self.rampTimes)
+      else if $.mode == 'max' || self.minValue == self.value then utils.formatZeroSigned(self.value * self.rampTimes)
+      // no brackets because it's usually in '[MAX: %s]'
+      else '%s ➝ %s' % [utils.formatZeroSigned(self.minValue * self.rampTimes), utils.formatZeroSigned(self.value * self.rampTimes)]
+    ),
     cooldown: if abi[8] != '' then std.parseInt(abi[8]) / 60 else 0,
     delay: abi[19],
     target: keywords.contentTarget(abi[21]) % { type: this.targetType },
     targetP: keywords.contentTargetP(abi[21]) % { type: this.targetType },
     targetType: keywords.type(abi[22]),
+    minValue: if abi[24] != '' then std.parseInt(abi[24]) / divisor,
     value: if abi[25] != '' then std.parseInt(abi[25]) / divisor,
-    // https://github.com/google/go-jsonnet/issues/554: '%g' % 0 causes overflow
-    valueStr: if self.value != null then (if self.value == 0 then '0' else '%g' % self.value),
-    valueStrSigned: if self.value != null then (if self.value == 0 then '+0' else '%+g' % self.value),
+    valueStr: if self.minValue != null && self.value != null then (
+      if $.mode == 'min' then utils.formatZero(self.minValue)
+      else if $.mode == 'max' || self.minValue == self.value then utils.formatZero(self.value)
+      else '[%s ➝ %s]' % [utils.formatZero(self.minValue), utils.formatZero(self.value)]
+    ),
+    valueStrSigned: if self.minValue != null && self.value != null then (
+      if $.mode == 'min' then utils.formatZeroSigned(self.minValue)
+      else if $.mode == 'max' || self.minValue == self.value then utils.formatZeroSigned(self.value)
+      else '[%s ➝ %s]' % [utils.formatZeroSigned(self.minValue), utils.formatZeroSigned(self.value)]
+    ),
+    minValue2: if abi[26] != '' then std.parseInt(abi[26]) / divisor,
     value2: if abi[27] != '' then std.parseInt(abi[27]) / divisor,
-    value2Str: if self.value2 != null then (if self.value2 == 0 then '0' else '%g' % self.value2),
-    buffDurationStr: if abi[31] != '' && abi[31] != '9.999999E11' then
-      (if abi[31] == '0' then '0' else '%g' % (std.parseInt(abi[31]) / 6000000)),
+    value2Str: if self.minValue2 != null && self.value2 != null then (
+      if $.mode == 'min' then utils.formatZero(self.minValue2)
+      else if $.mode == 'max' || self.minValue2 == self.value2 then utils.formatZero(self.value2)
+      else '[%s ➝ %s]' % [utils.formatZero(self.minValue2), utils.formatZero(self.value2)]
+    ),
+    value2StrSigned: if self.minValue2 != null && self.value2 != null then (
+      if $.mode == 'min' then utils.formatZeroSigned(self.minValue2)
+      else if $.mode == 'max' || self.minValue2 == self.value2 then utils.formatZeroSigned(self.value2)
+      else '[%s ➝ %s]' % [utils.formatZeroSigned(self.minValue2), utils.formatZeroSigned(self.value2)]
+    ),
+    minBuffDuration: if abi[30] != '' && abi[30] != '9.999999E11' then std.parseInt(abi[30]) / 6000000,
+    buffDuration: if abi[31] != '' && abi[31] != '9.999999E11' then std.parseInt(abi[31]) / 6000000,
+    buffDurationStr: if self.minBuffDuration != null && self.buffDuration != null then (
+      if $.mode == 'min' then utils.formatZero(self.minBuffDuration)
+      else if $.mode == 'max' || self.minBuffDuration == self.buffDuration then utils.formatZero(self.buffDuration)
+      else '[%s ➝ %s]' % [utils.formatZero(self.minBuffDuration), utils.formatZero(self.buffDuration)]
+    ),
     buffStacks: if abi[34] != '' && abi[34] != '(None)' then std.parseInt(abi[34]) else 0,
+    stackedValueStrSigned: if self.minValue != null && self.value != null then (
+      if $.mode == 'min' then utils.formatZeroSigned(self.minValue * self.buffStacks)
+      else if $.mode == 'max' || self.minValue == self.value then utils.formatZeroSigned(self.value * self.buffStacks)
+      else '[%s ➝ %s]' % [utils.formatZeroSigned(self.minValue * self.buffStacks), utils.formatZeroSigned(self.value * self.buffStacks)]
+    ),
     buffStackable: if self.buffStacks > 0 then 'stackable ' else '',
     buffUntilFlip: if abi[35] != '' && abi[35] != '(None)' then std.parseInt(abi[35]) else 0,
     buffUntilFlipEnds: if abi[37] != '' && abi[37] != '(None)' then std.parseInt(abi[37]) else 0,
@@ -67,7 +104,7 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
   addBuff(mapped)::
     ' (%(valueStrSigned)s%%/%(buffDurationStr)ss' % mapped
     + (
-      if mapped.buffStacks > 0 then '/MAX: %+g%%' % (mapped.value * mapped.buffStacks)
+      if mapped.buffStacks > 0 then '/MAX: %(stackedValueStrSigned)s%%' % mapped
       else ''
     ) + ')'
     + delay(mapped.delay)
@@ -80,7 +117,7 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
   addStats(mapped)::
     local minRamp = if std.setMember(mapped.triggerId, ['252', '52', '55', '56']) then 1 else 0;
     ' %(valueStrSigned)s%%' % mapped
-    + (if mapped.rampTimes > minRamp then ' [MAX: %+g%%]' % (mapped.value * mapped.rampTimes) else '')
+    + (if mapped.rampTimes > minRamp then ' [MAX: %(rampedValueStrSigned)s%%]' % mapped else '')
     + delay(mapped.delay)
     + cooldown(mapped.cooldown),
 
@@ -203,7 +240,7 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
   '200':: function(abi)
     local mapped = self.map(abi, divisor=-100000);
     'combo count needed for Lv3 power flip %(valueStrSigned)s' % mapped
-    + (if mapped.rampTimes > 0 then ' [MAX: %+g]' % (mapped.value * mapped.rampTimes) else '')
+    + (if mapped.rampTimes > 0 then ' [MAX: %(rampedValueStrSigned)s]' % mapped else '')
     + delay(self.map(abi).delay)
     + cooldown(self.map(abi).cooldown),
   '201':: function(abi) 'multi-hit (2x/%(valueStrSigned)s%%)' % self.map(abi),
@@ -343,7 +380,7 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
   '461':: function(abi)
     (
       'grant %(target)s '
-      + (if self.map(abi, divisor=100000).value > 1 then '%(valueStr)s levels of ' else '')
+      + (if self.map(abi, divisor=100000).valueStr != '1' then '%(valueStr)s levels of ' else '')
       + '[%(ucName)s]%(ucDuration)s%(ucMaxStacks)s (undispellable)'
     ) % self.map(abi, divisor=100000)
     + delay(self.map(abi).delay)
@@ -375,7 +412,7 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
   '485':: function(abi) "%(contentTargetType)s multiballs' HP" % self.map(abi) + self.addStats(self.map(abi)),
   '487':: function(abi) '%(targetP)s ability damage buff duration' % self.map(abi) + self.addStats(self.map(abi)),
   '489':: function(abi)
-    'grant combo boost buff [combo %(value)+d]' % self.map(abi, divisor=100000)
+    'grant combo boost buff [combo %(valueStrSigned)s]' % self.map(abi, divisor=100000)
     + delay(self.map(abi).delay)
     + untilFlip(self.map(abi).buffUntilFlip)
     + untilFlipEnds(self.map(abi).buffUntilFlipEnds, self.map(abi).buffUntilFlipEndsLv)
@@ -404,7 +441,11 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
     + triggerTimes(self.map(abi).rampTimes)
     + cooldown(self.map(abi).cooldown),
   '527':: function(abi)
-    'remove %(valueStr)s debuff from %(target)s' % self.map(abi, divisor=100000)
+    (
+      'remove %(valueStr)s '
+      + (if self.map(abi, divisor=100000).valueStr == '1' then 'debuff ' else 'debuffs ')
+      + 'from %(target)s'
+    ) % self.map(abi, divisor=100000)
     + delay(self.map(abi).delay)
     + triggerTimes(self.map(abi).rampTimes)
     + cooldown(self.map(abi).cooldown),

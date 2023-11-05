@@ -1,9 +1,12 @@
 local keywords = import './keywords.libsonnet';
 local uniqueCondition = import './unique_condition.libsonnet';
+local utils = import './utils.libsonnet';
 
 {
-  index(index=92)::
+  mode:: 'max',
+  index(index=92, mode='max')::
     self {
+      mode:: mode,
       parse:: function(abi) super.parse(abi[index:]),
     },
 
@@ -16,12 +19,22 @@ local uniqueCondition = import './unique_condition.libsonnet';
     target: keywords.duringTarget(abi[1]) % { type: this.targetType },
     targetP: keywords.duringTargetP(abi[1]) % { type: this.targetType },
     targetType: keywords.type(abi[2]),
+    minValue: if abi[3] != '' then (std.parseInt(abi[3]) / divisor),
     value: if abi[4] != '' then (std.parseInt(abi[4]) / divisor),
-    valueStr: if self.value != null then (if self.value == 0 then '0' else '%g' % self.value),
+    valueStr: if self.minValue != null && self.value != null then (
+      if $.mode == 'min' then utils.formatZero(self.minValue)
+      else if $.mode == 'max' || self.minValue == self.value then utils.formatZero(self.value)
+      else '[%s ➝ %s]' % [utils.formatZero(self.minValue), utils.formatZero(self.value)]
+    ),
     rampTimes: if abi[5] != '' && abi[5] != '(None)' then std.parseInt(abi[5]) else 0,
     checkType: keywords.type(abi[6]),
+    minValue2: if abi[8] != '' then (std.parseInt(abi[8]) / divisor),
     value2: if abi[9] != '' then (std.parseInt(abi[9]) / divisor),
-    value2Str: if self.value2 != null then (if self.value2 == 0 then '0' else '%g' % self.value2),
+    value2Str: if self.minValue2 != null && self.value2 != null then (
+      if $.mode == 'min' then utils.formatZero(self.minValue2)
+      else if $.mode == 'max' || self.minValue2 == self.value2 then utils.formatZero(self.value2)
+      else '[%s ➝ %s]' % [utils.formatZero(self.minValue2), utils.formatZero(self.value2)]
+    ),
   } + uniqueCondition.mixin(abi[7]),
 
   '':: function(abi) '',
@@ -31,7 +44,7 @@ local uniqueCondition = import './unique_condition.libsonnet';
   '1':: function(abi) 'while %(targetP)s HP is at or below %(valueStr)s%%, ' % self.map(abi, divisor=1000),
   '2':: function(abi) (
     if self.map(abi).rampTimes <= 1 then 'while combo count is at or above %(valueStr)s, '
-    else if self.map(abi).value == 1 then 'for every combo, '
+    else if self.map(abi).valueStr == '1' then 'for every combo, '
     else 'for every %(valueStr)s combo, '
   ) % self.map(abi),
   '4':: function(abi) 'while in fever, ',
@@ -47,32 +60,32 @@ local uniqueCondition = import './unique_condition.libsonnet';
   '32':: function(abi) 'while power flip damage buff is active, ',
   '36':: function(abi) (
     if self.map(abi).rampTimes <= 1 then 'while %(target)s has %(valueStr)s or more debuffs, '
-    else if self.map(abi).value == 1 then 'for every debuff on %(target)s, '
+    else if self.map(abi).valueStr == '1' then 'for every debuff on %(target)s, '
     else 'for every %(valueStr)s debuffs on %(target)s, '
   ) % self.map(abi),
   '37':: function(abi) (
     if self.map(abi).rampTimes <= 1 then 'while %(target)s has %(valueStr)s or more buffs, '
-    else if self.map(abi).value == 1 then 'for every buff on %(target)s, '
+    else if self.map(abi).valueStr == '1' then 'for every buff on %(target)s, '
     else 'for every %(valueStr)s buffs on %(target)s, '
   ) % self.map(abi),
   '38':: function(abi) (
     if self.map(abi).rampTimes <= 1 then 'while %(target)s has %(valueStr)s or more ATK buffs, '
-    else if self.map(abi).value == 1 then 'for every ATK buff on %(target)s, '
+    else if self.map(abi).valueStr == '1' then 'for every ATK buff on %(target)s, '
     else 'for every %(valueStr)s ATK buffs on %(target)s, '
   ) % self.map(abi),
   '40':: function(abi) (
     if self.map(abi).rampTimes <= 1 then 'while %(target)s has %(valueStr)s or more skill damage buffs, '
-    else if self.map(abi).value == 1 then 'for every skill damage buff on %(target)s, '
+    else if self.map(abi).valueStr == '1' then 'for every skill damage buff on %(target)s, '
     else 'for every %(valueStr)s skill damage buffs on %(target)s, '
   ) % self.map(abi),
   '62':: function(abi) (
     if self.map(abi).rampTimes <= 1 then 'while there are %(valueStr)s or more power flip damage buffs, '
-    else if self.map(abi).value == 1 then 'for every power flip damage buffs, '
+    else if self.map(abi).valueStr == '1' then 'for every power flip damage buffs, '
     else 'for every %(valueStr)s power flip damage buffs, '
   ) % self.map(abi),
   '64':: function(abi) (
     if self.map(abi).rampTimes <= 1 then 'while %(valueStr)s or more enemies are present, '
-    else if self.map(abi).value == 1 then 'for every enemy present, '
+    else if self.map(abi).valueStr == '1' then 'for every enemy present, '
     else 'for every %(valueStr)s enemies present, '
   ) % self.map(abi),
   '72':: function(abi) 'while %(target)s has barrier, ' % self.map(abi),
@@ -90,36 +103,36 @@ local uniqueCondition = import './unique_condition.libsonnet';
   '107':: function(abi) 'while %(targetP)s skill gauge is at or above %(valueStr)s%%, ' % self.map(abi, divisor=1000),
   '109':: function(abi) (
     'for every %(valueStr)s%% of %(targetP)s HP remaining'
-    + (if self.map(abi, divisor=1000).value2 != 0 then ' above %(value2Str)s%% HP, ' else ', ')
+    + (if self.map(abi, divisor=1000).value2Str != '0' then ' above %(value2Str)s%% HP, ' else ', ')
   ) % self.map(abi, divisor=1000),
   '110':: function(abi) (
     'for every %(valueStr)s%% of %(targetP)s HP missing'
-    + (if self.map(abi, divisor=1000).value2 != 100 then ' below %(value2Str)s%% HP, ' else ', ')
+    + (if self.map(abi, divisor=1000).value2Str != '100' then ' below %(value2Str)s%% HP, ' else ', ')
   ) % self.map(abi, divisor=1000),
   '134':: function(abi) (
     if self.map(abi).rampTimes <= 1 then 'while %(target)s has %(valueStr)s or more levels of [%(ucName)s], '
-    else if self.map(abi).value == 1 then 'for every level of [%(ucName)s] on %(target)s, '
+    else if self.map(abi).valueStr == '1' then 'for every level of [%(ucName)s] on %(target)s, '
     else 'for every %(valueStr)s levels of [%(ucName)s] on %(target)s, '
   ) % self.map(abi),
   '136':: function(abi) (
     if self.map(abi).rampTimes <= 1 then 'while there are %(valueStr)s or more debuffs on an enemy, '
-    else if self.map(abi).value == 1 then 'for every debuff on an enemy, '
+    else if self.map(abi).valueStr == '1' then 'for every debuff on an enemy, '
     else 'for every %(valueStr)s debuffs on an enemy, '
   ) % self.map(abi),
   // this is hard to word the second part without knowledge of the first?
   '152':: function(abi) (
     if self.map(abi).rampTimes <= 1 then 'while there are %(valueStr)s or more light resistance debuffs on an enemy, '
-    else if self.map(abi).value == 1 then 'for every light resistance debuff on an enemy, '
+    else if self.map(abi).valueStr == '1' then 'for every light resistance debuff on an enemy, '
     else 'for every %(valueStr)s light resistance debuffs on an enemy, '
   ) % self.map(abi),
   '178':: function(abi) (
     if self.map(abi).rampTimes <= 1 then 'while %(target)s has %(valueStr)s or more Adversity buffs, '
-    else if self.map(abi).value == 1 then 'for every Adversity buff on %(target)s, '
+    else if self.map(abi).valueStr == '1' then 'for every Adversity buff on %(target)s, '
     else 'for every %(valueStr)s Adversity buffs on %(target)s, '
   ) % self.map(abi),
   '187':: function(abi) (
     if self.map(abi).rampTimes <= 1 then 'while %(target)s has %(valueStr)s or more water resistance buffs, '
-    else if self.map(abi).value == 1 then 'for every water resistance buff on %(target)s, '
+    else if self.map(abi).valueStr == '1' then 'for every water resistance buff on %(target)s, '
     else 'for every %(valueStr)s water resistance buffs on %(target)s, '
   ) % self.map(abi),
   '192':: function(abi) 'against enemies with [%(ucName)s], ' % self.map(abi),
@@ -136,17 +149,17 @@ local uniqueCondition = import './unique_condition.libsonnet';
   '207':: function(abi) 'if [%(ucName)s] is not active, ' % self.map(abi),
   '208':: function(abi) (
     if self.map(abi).rampTimes <= 1 then 'while %(valueStr)s or more Dark multiballs are present, '
-    else if self.map(abi).value == 1 then 'for every Dark multiball present, '
+    else if self.map(abi).valueStr == '1' then 'for every Dark multiball present, '
     else 'for every %(valueStr)s Dark multiballs present, '
   ) % self.map(abi),
   '209':: function(abi) (
     if self.map(abi).rampTimes <= 1 then 'while %(valueStr)s or more %(checkType)s multiballs are present, '
-    else if self.map(abi).value == 1 then 'for every %(checkType)s multiball present, '
+    else if self.map(abi).valueStr == '1' then 'for every %(checkType)s multiball present, '
     else 'for every %(valueStr)s %(checkType)s multiballs present, '
   ) % self.map(abi),
   '210':: function(abi) (
     if self.map(abi).rampTimes <= 1 then 'while %(valueStr)s or more coffins are present, '
-    else if self.map(abi).value == 1 then 'for every coffin present, '
+    else if self.map(abi).valueStr == '1' then 'for every coffin present, '
     else 'for every %(valueStr)s coffins present, '
   ) % self.map(abi),
   // 闇属性キャラ全員の棺桶からの復帰回数が 6 回以上の間、

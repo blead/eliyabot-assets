@@ -1,9 +1,12 @@
 local keywords = import './keywords.libsonnet';
+local utils = import './utils.libsonnet';
 
 {
+  mode:: 'max',
   // id is at [104] but we need triggerTarget from [93]
-  index(index=93)::
+  index(index=93, mode='max')::
     self {
+      mode:: mode,
       parse:: function(abi) super.parse(abi[index:]),
     },
 
@@ -15,6 +18,12 @@ local keywords = import './keywords.libsonnet';
     local this = self,
     triggerTarget: abi[0],
     rampTimes: if abi[4] != '' && abi[4] != '(None)' then std.parseInt(abi[4]) else 0,
+    rampedValueStrSigned: if self.minValue != null && self.value != null then (
+      if $.mode == 'min' then utils.formatZeroSigned(self.minValue * self.rampTimes)
+      else if $.mode == 'max' || self.minValue == self.value then utils.formatZeroSigned(self.value * self.rampTimes)
+      // no brackets because it's usually in '[MAX: %s]'
+      else '%s ➝ %s' % [utils.formatZeroSigned(self.minValue * self.rampTimes), utils.formatZeroSigned(self.value * self.rampTimes)]
+    ),
     doesNotStack: if abi[10] == 'true' then ' (does not stack)' else '',
     target:
       // daedalia's shenanigans
@@ -24,8 +33,13 @@ local keywords = import './keywords.libsonnet';
       if self.triggerTarget == '10' && abi[12] == '7' then "that multiball's"
       else keywords.contentTargetP(abi[12]) % { type: this.targetType },
     targetType: keywords.type(abi[13]),
+    minValue: if abi[15] != '' then std.parseInt(abi[15]) / divisor,
     value: if abi[16] != '' then std.parseInt(abi[16]) / divisor,
-    valueStrSigned: if self.value != null then (if self.value == 0 then '+0' else '%+g' % self.value),
+    valueStrSigned: if self.minValue != null && self.value != null then (
+      if $.mode == 'min' then utils.formatZeroSigned(self.minValue)
+      else if $.mode == 'max' || self.minValue == self.value then utils.formatZeroSigned(self.value)
+      else '[%s ➝ %s]' % [utils.formatZeroSigned(self.minValue), utils.formatZeroSigned(self.value)]
+    ),
     contentTargetType: keywords.type(abi[19]),
   },
 
@@ -33,7 +47,7 @@ local keywords = import './keywords.libsonnet';
     ' %(valueStrSigned)s%%' % mapped
     + (
       // for during effects we don't need to add max when rampTimes = 1
-      if mapped.rampTimes > 1 then ' [MAX: %+g%%]' % (mapped.value * mapped.rampTimes)
+      if mapped.rampTimes > 1 then ' [MAX: %(rampedValueStrSigned)s%%]' % mapped
       else ''
     ),
 
@@ -71,7 +85,7 @@ local keywords = import './keywords.libsonnet';
   '256':: function(abi)
     local mapped = self.map(abi, divisor=-100000);
     'combo count needed for Lv1 power flip %(valueStrSigned)s' % mapped
-    + (if mapped.rampTimes > 0 then ' [MAX: %+g]' % (mapped.value * mapped.rampTimes) else '')
+    + (if mapped.rampTimes > 0 then ' [MAX: %(rampedValueStrSigned)s]' % mapped else '')
     + mapped.doesNotStack,
   '258':: function(abi) '%(targetP)s ATK against that enemy' % self.map(abi) + self.addStats(self.map(abi)),
   '410':: function(abi) 'direct attack damage dealt' + self.addStats(self.map(abi)),

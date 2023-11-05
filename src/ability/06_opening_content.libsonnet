@@ -1,8 +1,11 @@
 local keywords = import './keywords.libsonnet';
+local utils = import './utils.libsonnet';
 
 {
-  index(index=118)::
+  mode:: 'max',
+  index(index=118, mode='max')::
     self {
+      mode:: mode,
       parse:: function(abi) super.parse(abi[index:]),
     },
 
@@ -11,8 +14,13 @@ local keywords = import './keywords.libsonnet';
     else '<opening content %s not defined> ' % abi[0],
 
   map(abi, multiplier=100):: {
+    minValue: if abi[1] != '' then std.parseJson(abi[1]) * multiplier,
     value: if abi[2] != '' then std.parseJson(abi[2]) * multiplier,
-    valueStrSigned: if self.value != null then (if self.value == 0 then '+0' else '%+g' % self.value),
+    valueStrSigned: if self.minValue != null && self.value != null then (
+      if $.mode == 'min' then utils.formatZeroSigned(self.minValue)
+      else if $.mode == 'max' || self.minValue == self.value then utils.formatZeroSigned(self.value)
+      else '[%s ➝ %s]' % [utils.formatZeroSigned(self.minValue), utils.formatZeroSigned(self.value)]
+    ),
   },
 
   '':: function(abi) '',
