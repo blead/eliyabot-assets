@@ -21,7 +21,6 @@ local utils = import './utils.libsonnet';
     rampedValueStrSigned: if self.minValue != null && self.value != null then (
       if $.mode == 'min' then utils.formatZeroSigned(self.minValue * self.rampTimes)
       else if $.mode == 'max' || self.minValue == self.value then utils.formatZeroSigned(self.value * self.rampTimes)
-      // no brackets because it's usually in '[MAX: %s]'
       else '%s ➝ %s' % [utils.formatZeroSigned(self.minValue * self.rampTimes), utils.formatZeroSigned(self.value * self.rampTimes)]
     ),
     doesNotStack: if abi[10] == 'true' then ' (does not stack)' else '',
@@ -38,7 +37,7 @@ local utils = import './utils.libsonnet';
     valueStrSigned: if self.minValue != null && self.value != null then (
       if $.mode == 'min' then utils.formatZeroSigned(self.minValue)
       else if $.mode == 'max' || self.minValue == self.value then utils.formatZeroSigned(self.value)
-      else '[%s ➝ %s]' % [utils.formatZeroSigned(self.minValue), utils.formatZeroSigned(self.value)]
+      else '%s ➝ %s' % [utils.formatZeroSigned(self.minValue), utils.formatZeroSigned(self.value)]
     ),
     contentTargetType: keywords.type(abi[19]),
   },

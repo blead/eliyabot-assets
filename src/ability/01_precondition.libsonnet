@@ -23,7 +23,7 @@ local uniqueCondition = import './unique_condition.libsonnet';
     valueStr:
       if $.mode == 'min' then '%g' % self.minValue
       else if $.mode == 'max' || self.minValue == self.value then '%g' % self.value
-      else '[%g ➝ %g]' % [self.minValue, self.value],
+      else '%g ➝ %g' % [self.minValue, self.value],
     checkType: keywords.type(abi[5]),
   } + uniqueCondition.mixin(abi[6]),
 

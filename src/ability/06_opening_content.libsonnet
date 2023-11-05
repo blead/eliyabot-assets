@@ -19,7 +19,7 @@ local utils = import './utils.libsonnet';
     valueStrSigned: if self.minValue != null && self.value != null then (
       if $.mode == 'min' then utils.formatZeroSigned(self.minValue)
       else if $.mode == 'max' || self.minValue == self.value then utils.formatZeroSigned(self.value)
-      else '[%s ➝ %s]' % [utils.formatZeroSigned(self.minValue), utils.formatZeroSigned(self.value)]
+      else '%s ➝ %s' % [utils.formatZeroSigned(self.minValue), utils.formatZeroSigned(self.value)]
     ),
   },
 

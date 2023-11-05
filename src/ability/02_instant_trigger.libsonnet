@@ -26,13 +26,13 @@ local everyTime(count) = if count == '1' then 'when ' else 'every %s times ' % c
     valueStr:
       if $.mode == 'min' then '%g' % self.minValue
       else if $.mode == 'max' || self.minValue == self.value then '%g' % self.value
-      else '[%g ➝ %g]' % [self.minValue, self.value],
+      else '%g ➝ %g' % [self.minValue, self.value],
     minValue2: if abi[5] != '' then std.parseInt(abi[5]) / divisor,
     value2: if abi[6] != '' then std.parseInt(abi[6]) / divisor,
     value2Str:
       if $.mode == 'min' then '%g' % self.minValue2
       else if $.mode == 'max' || self.minValue2 == self.value2 then '%g' % self.value2
-      else '[%g ➝ %g]' % [self.minValue2, self.value2],
+      else '%g ➝ %g' % [self.minValue2, self.value2],
     rampTimes: if abi[7] != '' && abi[7] != '(None)' then std.parseInt(abi[7]) else 0,
     checkType: keywords.type(abi[9]),
     multiballGroup: if abi[11] in multiballGroups then multiballGroups[abi[11]][0][0] else '<multiballGroup: %s>' % abi[11],

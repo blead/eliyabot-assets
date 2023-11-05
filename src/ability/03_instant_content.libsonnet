@@ -44,7 +44,6 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
     rampedValueStrSigned: if self.minValue != null && self.value != null then (
       if $.mode == 'min' then utils.formatZeroSigned(self.minValue * self.rampTimes)
       else if $.mode == 'max' || self.minValue == self.value then utils.formatZeroSigned(self.value * self.rampTimes)
-      // no brackets because it's usually in '[MAX: %s]'
       else '%s ➝ %s' % [utils.formatZeroSigned(self.minValue * self.rampTimes), utils.formatZeroSigned(self.value * self.rampTimes)]
     ),
     cooldown: if abi[8] != '' then std.parseInt(abi[8]) / 60 else 0,
@@ -57,37 +56,37 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
     valueStr: if self.minValue != null && self.value != null then (
       if $.mode == 'min' then utils.formatZero(self.minValue)
       else if $.mode == 'max' || self.minValue == self.value then utils.formatZero(self.value)
-      else '[%s ➝ %s]' % [utils.formatZero(self.minValue), utils.formatZero(self.value)]
+      else '%s ➝ %s' % [utils.formatZero(self.minValue), utils.formatZero(self.value)]
     ),
     valueStrSigned: if self.minValue != null && self.value != null then (
       if $.mode == 'min' then utils.formatZeroSigned(self.minValue)
       else if $.mode == 'max' || self.minValue == self.value then utils.formatZeroSigned(self.value)
-      else '[%s ➝ %s]' % [utils.formatZeroSigned(self.minValue), utils.formatZeroSigned(self.value)]
+      else '%s ➝ %s' % [utils.formatZeroSigned(self.minValue), utils.formatZeroSigned(self.value)]
     ),
     minValue2: if abi[26] != '' then std.parseInt(abi[26]) / divisor,
     value2: if abi[27] != '' then std.parseInt(abi[27]) / divisor,
     value2Str: if self.minValue2 != null && self.value2 != null then (
       if $.mode == 'min' then utils.formatZero(self.minValue2)
       else if $.mode == 'max' || self.minValue2 == self.value2 then utils.formatZero(self.value2)
-      else '[%s ➝ %s]' % [utils.formatZero(self.minValue2), utils.formatZero(self.value2)]
+      else '%s ➝ %s' % [utils.formatZero(self.minValue2), utils.formatZero(self.value2)]
     ),
     value2StrSigned: if self.minValue2 != null && self.value2 != null then (
       if $.mode == 'min' then utils.formatZeroSigned(self.minValue2)
       else if $.mode == 'max' || self.minValue2 == self.value2 then utils.formatZeroSigned(self.value2)
-      else '[%s ➝ %s]' % [utils.formatZeroSigned(self.minValue2), utils.formatZeroSigned(self.value2)]
+      else '%s ➝ %s' % [utils.formatZeroSigned(self.minValue2), utils.formatZeroSigned(self.value2)]
     ),
     minBuffDuration: if abi[30] != '' && abi[30] != '9.999999E11' then std.parseInt(abi[30]) / 6000000,
     buffDuration: if abi[31] != '' && abi[31] != '9.999999E11' then std.parseInt(abi[31]) / 6000000,
     buffDurationStr: if self.minBuffDuration != null && self.buffDuration != null then (
       if $.mode == 'min' then utils.formatZero(self.minBuffDuration)
       else if $.mode == 'max' || self.minBuffDuration == self.buffDuration then utils.formatZero(self.buffDuration)
-      else '[%s ➝ %s]' % [utils.formatZero(self.minBuffDuration), utils.formatZero(self.buffDuration)]
+      else '%s ➝ %s' % [utils.formatZero(self.minBuffDuration), utils.formatZero(self.buffDuration)]
     ),
     buffStacks: if abi[34] != '' && abi[34] != '(None)' then std.parseInt(abi[34]) else 0,
     stackedValueStrSigned: if self.minValue != null && self.value != null then (
       if $.mode == 'min' then utils.formatZeroSigned(self.minValue * self.buffStacks)
       else if $.mode == 'max' || self.minValue == self.value then utils.formatZeroSigned(self.value * self.buffStacks)
-      else '[%s ➝ %s]' % [utils.formatZeroSigned(self.minValue * self.buffStacks), utils.formatZeroSigned(self.value * self.buffStacks)]
+      else '%s ➝ %s' % [utils.formatZeroSigned(self.minValue * self.buffStacks), utils.formatZeroSigned(self.value * self.buffStacks)]
     ),
     buffStackable: if self.buffStacks > 0 then 'stackable ' else '',
     buffUntilFlip: if abi[35] != '' && abi[35] != '(None)' then std.parseInt(abi[35]) else 0,
