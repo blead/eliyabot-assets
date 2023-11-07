@@ -232,21 +232,20 @@ def update_chars(sheet, spreadsheet_id):
                         col_without_spaces = col.replace(" ", "")
                         if (
                             col_without_spaces in devname_to_char[devname] and 
-                            (row[colidx] == "" or row[notesidx] == "(auto-generated)") and
-                            row[colidx] != devname_to_char[devname][col_without_spaces]
+                            (row[colidx] == "" or row[notesidx] == "(auto-generated)")
                         ):
                             updated_value = devname_to_char[devname][col_without_spaces]
                             if col_without_spaces == "Attribute":
-                                if row[colidx] == ATTRIBUTE_EN_TO_JP[updated_value]:
-                                    continue
                                 updated_value = ATTRIBUTE_EN_TO_JP[updated_value]
-                            updated_ranges.append(
-                                {
-                                    "range": f"'{sheet_name}'!{chr(ord('A')+colidx)}{rownum}",
-                                    "values": [[updated_value]],
-                                }
-                            )
-                            updated_cols.append(col_without_spaces)
+                            
+                            if row[colidx] != str(updated_value):
+                                updated_ranges.append(
+                                    {
+                                        "range": f"'{sheet_name}'!{chr(ord('A')+colidx)}{rownum}",
+                                        "values": [[updated_value]],
+                                    }
+                                )
+                                updated_cols.append(col_without_spaces)
 
                     if updated_cols:
                         logging.info(f"UPDATE:{devname}:{','.join(updated_cols)}")
@@ -332,23 +331,24 @@ def update_equips(sheet, spreadsheet_id):
                         col_without_spaces = col.replace(" ", "")
                         if (
                             col_without_spaces in devname_to_equip[devname] and 
-                            (row[colidx] == "" or row[notesidx] == "(auto-generated)") and
-                            row[colidx] != devname_to_equip[devname][col_without_spaces]
+                            (row[colidx] == "" or row[notesidx] == "(auto-generated)")
                         ):
                             updated_value = devname_to_equip[devname][
                                 col_without_spaces
                             ]
                             if col_without_spaces == "Attribute":
-                                if row[colidx] == ATTRIBUTE_EN_TO_JP[updated_value]:
-                                    continue
                                 updated_value = ATTRIBUTE_EN_TO_JP[updated_value]
-                            updated_ranges.append(
-                                {
-                                    "range": f"'{sheet_name}'!{chr(ord('A')+colidx)}{rownum}",
-                                    "values": [[updated_value]],
-                                }
-                            )
-                            updated_cols.append(col_without_spaces)
+                            elif col_without_spaces == "Rarity":
+                                updated_value = updated_value + "*"
+
+                            if row[colidx] != str(updated_value):
+                                updated_ranges.append(
+                                    {
+                                        "range": f"'{sheet_name}'!{chr(ord('A')+colidx)}{rownum}",
+                                        "values": [[updated_value]],
+                                    }
+                                )
+                                updated_cols.append(col_without_spaces)
 
                     if updated_cols:
                         logging.info(f"UPDATE:{devname}:{','.join(updated_cols)}")

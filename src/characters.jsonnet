@@ -17,7 +17,8 @@ local Character(id, data) = if '2' in characterSkills[data[0]] then {
   id: id,
   leaderSkillName:: characterTexts[id][0][8],
   leaderSkillDescription:: if data[17] in leaderAbilities then abilityParser.parseLeaderSkillFormatted(leaderAbilities[data[17]]),
-  skillName:: characterTexts[id][0][6],
+  skillName:: characterTexts[id][0][4],
+  upgradedSkillName:: characterTexts[id][0][6],
   skillDescription:: characterTexts[id][0][7],
   banners:: std.filter(function(x) std.member(x.pickup, id), banners),
 
