@@ -3,6 +3,10 @@ local keywords = import './keywords.libsonnet';
 local uniqueCondition = import './unique_condition.libsonnet';
 local utils = import './utils.libsonnet';
 
+local buffRampTimes(times, min, max) =
+  if times > 0 then ' (Effect amplified %s%% [MAX: %s%%] with each skill activation)' % [min, max]
+  else '';
+
 local delay(sec) = if sec != '' && sec != '0' then ' after %ss' % sec else '';
 
 local triggerTimes(count) =
@@ -34,7 +38,7 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
     },
 
   parse(abi)::
-    if abi[20] in self then self[abi[20]](abi[:46])
+    if abi[20] in self then self[abi[20]](abi[:55])
     else '<instant content %s not defined> ' % abi[20],
 
   map(abi, divisor=1000):: {
@@ -94,6 +98,13 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
     buffUntilFlipEndsLv: if abi[38] != '' && abi[38] != '(None)' then std.parseInt(abi[38]) else 0,
     contentTargetType: keywords.type(abi[39]),
     buffUndispellable: abi[40] == '1',
+    // displayed value = internal value + 1
+    buffRampTimes: if abi[54] != '' then std.parseInt(abi[54]) + 1 else 0,
+    buffRampedValueStrSigned: if self.minValue != null && self.value != null then (
+      if $.mode == 'min' then utils.formatZeroSigned(self.minValue * self.buffRampTimes)
+      else if $.mode == 'max' || self.minValue == self.value then utils.formatZeroSigned(self.value * self.buffRampTimes)
+      else '%s ➝ %s' % [utils.formatZeroSigned(self.minValue * self.buffRampTimes), utils.formatZeroSigned(self.value * self.buffRampTimes)]
+    ),
     changeSkill:
       if abi[43] in customAbilityStrings then customAbilityStrings[abi[43]][0][0]
       else '<changeSkill: %s>' % abi[43],
@@ -106,6 +117,7 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
       if mapped.buffStacks > 0 then '/MAX: %(stackedValueStrSigned)s%%' % mapped
       else ''
     ) + ')'
+    + buffRampTimes(mapped.buffRampTimes, mapped.valueStrSigned, mapped.buffRampedValueStrSigned)
     + delay(mapped.delay)
     + untilFlip(mapped.buffUntilFlip)
     + untilFlipEnds(mapped.buffUntilFlipEnds, mapped.buffUntilFlipEndsLv)
