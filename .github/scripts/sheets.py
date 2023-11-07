@@ -294,7 +294,7 @@ def update_chars(sheet, spreadsheet_id):
 def update_equips(sheet, spreadsheet_id):
     EQUIP_RANGES = [
         "'Gacha/Story Weapons'!A1:Z300",
-        "'Boss/Event Weapons'!A1:Z300",
+        "'Boss/Event Weapons'!A1:Z400",
     ]
 
     equips = read_json(EQUIPS_JSON)
