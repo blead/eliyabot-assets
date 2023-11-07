@@ -334,6 +334,9 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
   '309':: function(abi)
     '%(targetP)s damage taken from enemies with poison debuff' % self.map(abi)
     + self.addStats(self.map(abi, divisor=-1000)),
+  '315':: function(abi)
+    '%(targetP)s damage taken from enemies with [%(ucName)s] debuff' % self.map(abi)
+    + self.addStats(self.map(abi, divisor=-1000)),
   '318':: function(abi)
     'deal thunder damage to that enemy equating %(valueStr)s times of %(targetP)s ATK' % self.map(abi, divisor=100000)
     + delay(self.map(abi).delay)

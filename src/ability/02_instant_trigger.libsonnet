@@ -40,6 +40,7 @@ local everyTime(count) = if count == '1' then 'when ' else 'every %s times ' % c
   },
 
   '':: function(abi) '',
+  '(None)':: self[''],
   '0':: function(abi) if std.setMember(self.map(abi).instantContent, whenBattleBegins) then 'when battle begins, ' else '',
   '1':: function(abi)
     if self.map(abi).valueStr == '1' then 'every power flip, '
@@ -130,9 +131,15 @@ local everyTime(count) = if count == '1' then 'when ' else 'every %s times ' % c
   '191':: function(abi) everyTime(self.map(abi).valueStr) + '[%(multiballGroup)s] disappears, ' % self.map(abi),
   '192':: function(abi) everyTime(self.map(abi).valueStr) + '%(target)s bumps into an enemy, ' % self.map(abi),
   '193':: function(abi) 'if self is the unison character to [%(checkType)s], ' % self.map(abi),
+  '230':: function(abi)
+    if self.map(abi).value2Str == '1' then 'every 1 second of penetration buff, '
+    else 'every %(value2Str)s seconds of penetration buff, ' % self.map(abi, divisor=6000000),
   '231':: function(abi)
     if self.map(abi).value2Str == '1' then 'every 1 second of float buff, '
     else 'every %(value2Str)s seconds of float buff, ' % self.map(abi, divisor=6000000),
+  '243':: function(abi)
+    if self.map(abi).valueStr == '1' then 'every 1 second of fever, '
+    else 'every %(valueStr)s seconds of fever, ' % self.map(abi, divisor=6000000),
   '250':: function(abi) 'upon reaching %(valueStr)s combo %(value2Str)s times, ' % self.map(abi),
   '252':: function(abi) (
     if self.map(abi).valueStr == '6' then 'Resonance [Any], '
