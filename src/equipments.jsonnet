@@ -21,7 +21,7 @@ local Equipment(id, data) =
       else if data[13] == 'true' then abilityParser.parseAbilitySoulFormatted(equipmentAbilities[id])
       else 'Unobtainable',
   }
-  + if data[0] in overrides then overrides[data[0]] else {}
+  + (if data[0] in overrides then overrides[data[0]] else {})
   + (if id in equipmentAbilities then abilityParser.parseEquipmentFormatted(equipmentAbilities[id]) else {})
   + (if id in equipmentEnhancementAbilities then abilityParser.parseEquipmentEnhancementFormatted(equipmentEnhancementAbilities[id]) else {});
 
