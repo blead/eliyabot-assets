@@ -8,6 +8,7 @@ local keywords = import './ability/keywords.libsonnet';
 local abilityParser = import './ability/parser.libsonnet';
 local banners = import './banners.jsonnet';
 local elements = import './elements.json';
+local overrides = import './overrides/characters.jsonnet';
 
 local MAX_LV_BONUS = [null, 12 * 0.004, 10 * 0.005, 8 * 0.008, 6 * 0.015, 4 * 0.03];
 local AWAKEN_STATS = [null, [30, 150], [40, 200], [50, 250], [54, 270], [60, 300]];
@@ -47,6 +48,6 @@ local Character(id, data) = if '2' in characterSkills[data[0]] then {
   Ability4: if data[22] in abilities then abilityParser.parseAbilityFormatted(abilities[data[22]]),
   Ability5: if data[23] in abilities then abilityParser.parseAbilityFormatted(abilities[data[23]]),
   Ability6: if data[24] in abilities then abilityParser.parseAbilityFormatted(abilities[data[24]]),
-};
+} + if data[0] in overrides then overrides[data[0]] else {};
 
 std.prune([Character(char.key, char.value[0]) for char in std.objectKeysValues(characters)])

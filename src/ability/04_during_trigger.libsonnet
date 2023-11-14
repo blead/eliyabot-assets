@@ -1,5 +1,5 @@
 local keywords = import './keywords.libsonnet';
-local uniqueCondition = import './unique_condition.libsonnet';
+local uniqueConditions = import './unique_conditions.libsonnet';
 local utils = import './utils.libsonnet';
 
 {
@@ -35,7 +35,7 @@ local utils = import './utils.libsonnet';
       else if $.mode == 'max' || self.minValue2 == self.value2 then utils.formatZero(self.value2)
       else '%s ➝ %s' % [utils.formatZero(self.minValue2), utils.formatZero(self.value2)]
     ),
-  } + uniqueCondition.mixin(abi[7]),
+  } + uniqueConditions.mixin(abi[7]),
 
   '':: function(abi) '',
   '0':: function(abi) 'while %(targetP)s HP is at or above %(valueStr)s%%, ' % self.map(abi, divisor=1000),

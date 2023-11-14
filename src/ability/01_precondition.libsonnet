@@ -1,5 +1,5 @@
 local keywords = import './keywords.libsonnet';
-local uniqueCondition = import './unique_condition.libsonnet';
+local uniqueConditions = import './unique_conditions.libsonnet';
 
 {
   mode:: 'max',
@@ -25,7 +25,7 @@ local uniqueCondition = import './unique_condition.libsonnet';
       else if $.mode == 'max' || self.minValue == self.value then '%g' % self.value
       else '%g ➝ %g' % [self.minValue, self.value],
     checkType: keywords.type(abi[5]),
-  } + uniqueCondition.mixin(abi[6]),
+  } + uniqueConditions.mixin(abi[6]),
 
   '':: function(abi) '',
   '0':: function(abi) '',

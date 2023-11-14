@@ -1,5 +1,5 @@
-local multiballGroups = import '../../../wf-assets/orderedmap/battle/multiball/multiball_group.json';
 local keywords = import './keywords.libsonnet';
+local multiballGroups = import './multiball_groups.libsonnet';
 local whenBattleBegins = import './when_battle_begins.json';
 
 local everyTime(count) = if count == '1' then 'when ' else 'every %s times ' % count;
@@ -35,7 +35,7 @@ local everyTime(count) = if count == '1' then 'when ' else 'every %s times ' % c
       else '%g ➝ %g' % [self.minValue2, self.value2],
     rampTimes: if abi[7] != '' && abi[7] != '(None)' then std.parseInt(abi[7]) else 0,
     checkType: keywords.type(abi[9]),
-    multiballGroup: if abi[11] in multiballGroups then multiballGroups[abi[11]][0][0] else '<multiballGroup: %s>' % abi[11],
+    multiballGroup: if abi[11] in multiballGroups then multiballGroups[abi[11]].name else '<multiballGroup: %s>' % abi[11],
     instantContent: abi[20],
   },
 

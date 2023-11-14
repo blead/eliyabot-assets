@@ -1,6 +1,6 @@
-local customAbilityStrings = import '../../../wf-assets/orderedmap/string/custom_ability_string.json';
+local customAbilityStrings = import './custom_ability_strings.libsonnet';
 local keywords = import './keywords.libsonnet';
-local uniqueCondition = import './unique_condition.libsonnet';
+local uniqueConditions = import './unique_conditions.libsonnet';
 local utils = import './utils.libsonnet';
 
 local buffRampTimes(times, min, max) =
@@ -111,10 +111,10 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
       else '%s ➝ %s' % [utils.formatZeroSigned(self.minValue * self.buffRampTimes), utils.formatZeroSigned(self.value * self.buffRampTimes)]
     ),
     changeSkill:
-      if abi[43] in customAbilityStrings then customAbilityStrings[abi[43]][0][0]
+      if abi[43] in customAbilityStrings then customAbilityStrings[abi[43]]
       else '<changeSkill: %s>' % abi[43],
     activatesSeparately: abi[45],
-  } + uniqueCondition.mixin(abi[41]),
+  } + uniqueConditions.mixin(abi[41]),
 
   addBuff(mapped)::
     ' (%(valueStrSigned)s%%/%(buffDurationStr)ss' % mapped
