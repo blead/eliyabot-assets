@@ -23,7 +23,8 @@ local untilFlip(count) =
 
 local untilFlipEnds(count, level=3) =
   if count == 1 then ' until power flip Lv%d ends' % level
-  else if count > 1 then ' until the next %d Lv%d power flips end' % [count, level]
+  else if count > 1 && count <= 3 then ' until the next %d Lv%d power flips end' % [count, level]
+  else if count > 3 then ' until the next %d power flips end' % count
   else '';
 
 local activatesSeparately(cond) = if cond == 'true' then ' (activates separately for each character)' else '';
