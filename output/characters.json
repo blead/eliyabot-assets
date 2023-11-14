@@ -1257,6 +1257,37 @@
     "id": "111177"
   },
   {
+    "Ability1": "If self is a Fire character, when battle begins, own skill gauge +100%",
+    "Ability2": "If self is a Fire character, every 3 power flips, own ATK +20% [MAX: +200%]",
+    "Ability3": "[Main] Every 3 power flips, own ATK +20% [MAX: +200%] / [Main] Every 3 power flips, own skill damage +20% [MAX: +200%] / [Main] When own skill activates, grant self ATK buff (+200%/20s) until the next 4 Lv11 power flips end",
+    "Attribute": "Fire",
+    "DevNicknames": "fire_dragon_zenith",
+    "Gender": "Male",
+    "JPName": "ヴァーグナー",
+    "LeaderBuff": "[プロミネンス・プラウド]\nEvery 3 power flips, Fire characters' ATK +20% [MAX: +200%] / Every 3 power flips, Fire characters' skill damage +20% [MAX: +200%] / Resonance [Fire], every 5 power flips, Fire characters' skill gauge +5% / Resonance [Fire], when own skill activates, grant self 3 levels of [ブレイブ・ブレイズ] (20s) [MAX: 3] (undispellable) / Resonance [Fire], while self has [ブレイブ・ブレイズ], every power flip, 特殊スキルを発動 / Resonance [Fire], while self has [ブレイブ・ブレイズ], every power flip, remove 1 level of [ブレイブ・ブレイズ] from self",
+    "MaxATK": 1132,
+    "MaxHP": 4847,
+    "Race": "Dragon",
+    "Rarity": 5,
+    "Role": "Bow",
+    "Skill": "[プロミネンス・ブレイク]\n前方に跳躍し、爆炎の衝撃波で周囲の敵に火ダメージ ／ しばらくの間、フィールド全体が炎に包まれ一定間隔で全ての敵に火ダメージ（弱点破壊なし）",
+    "SkillIcon": "atk_field",
+    "SkillRange": [
+      "1",
+      "0",
+      "200",
+      "",
+      "0",
+      "-125",
+      "",
+      ""
+    ],
+    "SkillWait": "500",
+    "Stance": "Attacker",
+    "SubName": "炎龍王",
+    "id": "111183"
+  },
+  {
     "Ability1": "Every 2 power flips, own ATK +5.64% [MAX: +112.8%]",
     "Ability2": "When battle begins, own skill gauge +56.4% / Every 5 seconds, own ATK +5.64% [MAX: +84.6%]",
     "Ability3": "[Main] Own ATK +56.4% / [Main] 「アタシに表に出ろとはいい度胸じゃねーか！本気出してやるよ！」",
