@@ -21,3 +21,8 @@ jobs:
         GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
         SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
       run: python .github/scripts/sheets.py
+    - name: Update eliyabot
+      uses: fjogeleit/http-request-action@v1
+      with:
+        url: 'https://eliya-bot.herokuapp.com/update'
+        method: 'POST'
