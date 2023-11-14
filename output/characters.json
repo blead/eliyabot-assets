@@ -1259,7 +1259,7 @@
   {
     "Ability1": "If self is a Fire character, when battle begins, own skill gauge +100%",
     "Ability2": "If self is a Fire character, every 3 power flips, own ATK +20% [MAX: +200%]",
-    "Ability3": "[Main] Every 3 power flips, own ATK +20% [MAX: +200%] / [Main] Every 3 power flips, own skill damage +20% [MAX: +200%] / [Main] When own skill activates, grant self ATK buff (+200%/20s) until the next 4 Lv11 power flips end",
+    "Ability3": "[Main] Every 3 power flips, own ATK +20% [MAX: +200%] / [Main] Every 3 power flips, own skill damage +20% [MAX: +200%] / [Main] When own skill activates, grant self ATK buff (+200%/20s) until the next 4 power flips end",
     "Attribute": "Fire",
     "DevNicknames": "fire_dragon_zenith",
     "Gender": "Male",
