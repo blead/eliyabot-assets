@@ -9,12 +9,6 @@ SPREADSHEET_ID = os.environ.get("SPREADSHEET_ID")
 CHARS_JSON = os.environ.get("CHARS_JSON", "processed/playable_characters.json")
 EQUIPS_JSON = os.environ.get("EQUIPS_JSON", "processed/playable_equipments.json")
 
-CHAR_OVERRIDES = {
-    "wirfled_playable": {"Ability6"},
-    "guild_front_girl_playable": {"Ability6"},
-    "combat_animal_meteor23": {"Ability6"},
-}
-
 ATTRIBUTE_EN_TO_JP = {
     "Fire": "火",
     "Water": "水",
@@ -238,10 +232,7 @@ def update_chars(sheet, spreadsheet_id):
                         col_without_spaces = col.replace(" ", "")
                         if (
                             col_without_spaces in devname_to_char[devname] and 
-                            (
-                                row[colidx] == "" or row[notesidx] == "(auto-generated)" or
-                                (devname in CHAR_OVERRIDES and col_without_spaces in CHAR_OVERRIDES[devname])
-                            )
+                            (row[colidx] == "" or row[notesidx] == "(auto-generated)")
                         ):
                             updated_value = devname_to_char[devname][col_without_spaces]
                             if col_without_spaces == "Attribute":
