@@ -2590,12 +2590,15 @@
   {
     "AbilitySoul": "Resonance [Thunder], when entering fever, Thunder characters' ATK +25% [MAX: +75%]",
     "Attribute": "Thunder",
+    "AwakenLv3": "Resonance [Thunder], when entering fever, Thunder characters' ATK +20% [MAX: +60%]",
+    "AwakenLv5": "Awaken Lv3 is enhanced: Resonance [Thunder], when entering fever, Thunder characters' ATK +35% [MAX: +105%]",
     "DevNicknames": "sword_0077",
     "ENName": "Tonnere Rugir",
     "JPName": "トネール・ルジア",
     "MaxATK": "185",
     "MaxHP": "625",
     "Rarity": "5",
+    "WeaponSkill": "Resonance [Thunder], when entering fever, Thunder characters' ATK +50% [MAX: +150%]",
     "id": "5010077"
   },
   {
@@ -5343,34 +5346,43 @@
   {
     "AbilitySoul": "Unobtainable",
     "Attribute": "Thunder",
+    "AwakenLv3": "",
+    "AwakenLv5": "",
     "DevNicknames": "acce_0054",
     "ENName": "Golden Feathered Robe",
     "JPName": "黄金の羽衣",
     "MaxATK": "100",
     "MaxHP": "500",
     "Rarity": "5",
+    "WeaponSkill": "Resonance [Thunder], outside of fever, when a Thunder character's skill activates, fever gauge +75",
     "id": "5090054"
   },
   {
     "AbilitySoul": "Unobtainable",
     "Attribute": "All",
+    "AwakenLv3": "",
+    "AwakenLv5": "",
     "DevNicknames": "acce_0055",
     "ENName": "Drop Brooch",
     "JPName": "雫のブローチ",
     "MaxATK": "100",
     "MaxHP": "500",
     "Rarity": "5",
+    "WeaponSkill": "Resonance [Any], when battle begins, party characters' skill gauge +25%",
     "id": "5090055"
   },
   {
     "AbilitySoul": "Unobtainable",
     "Attribute": "All",
+    "AwakenLv3": "",
+    "AwakenLv5": "",
     "DevNicknames": "acce_0056",
     "ENName": "Drop Belt",
     "JPName": "雫のベルト",
     "MaxATK": "100",
     "MaxHP": "500",
     "Rarity": "5",
+    "WeaponSkill": "Resonance [Any], when battle begins, for every 1% skill gauge by which a party character exceeds its max skill gauge, that character's ATK +1.5% [MAX: +150%]",
     "id": "5090056"
   },
   {
