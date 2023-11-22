@@ -1,6 +1,10 @@
 name: wf-assets
 on:
   workflow_dispatch:
+  push:
+    paths-ignore:
+    - 'output/**'
+    - 'processed/**'
 
 jobs:
   wf-assets:

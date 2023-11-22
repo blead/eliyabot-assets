@@ -58,6 +58,7 @@ local utils = import './utils.libsonnet';
   '30':: function(abi) 'while penetration buff is active, ',
   '31':: function(abi) 'while float buff is active, ',
   '32':: function(abi) 'while power flip damage buff is active, ',
+  '34':: function(abi) 'while dash cooldown reduction buff is active, ',
   '36':: function(abi) (
     if self.map(abi).rampTimes <= 1 then 'while %(target)s has %(valueStr)s or more debuffs, '
     else if self.map(abi).valueStr == '1' then 'for every debuff on %(target)s, '
