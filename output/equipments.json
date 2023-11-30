@@ -2602,6 +2602,20 @@
     "id": "5010077"
   },
   {
+    "AbilitySoul": "Resonance [Dark], for every 1% of party characters' total HP missing, own ATK +0.4% [MAX: +40%] / Resonance [Dark], for every 1% of party characters' total HP missing, own skill damage +1% [MAX: +100%]",
+    "Attribute": "Dark",
+    "AwakenLv3": "Resonance [Dark], for every 1% of party characters' total HP missing, own ATK +0.8% [MAX: +80%]",
+    "AwakenLv5": "Awaken Lv3 is enhanced: Resonance [Dark], for every 1% of party characters' total HP missing, own ATK +1.7% [MAX: +170%]",
+    "DevNicknames": "sword_0078",
+    "ENName": "Griffe Foncé",
+    "JPName": "グリフ・フォンセ",
+    "MaxATK": "235",
+    "MaxHP": "375",
+    "Rarity": "5",
+    "WeaponSkill": "Resonance [Dark], for every 1% of party characters' total HP missing, own ATK +0.8% [MAX: +80%] / Resonance [Dark], for every 1% of party characters' total HP missing, own skill damage +2% [MAX: +200%]",
+    "id": "5010078"
+  },
+  {
     "AbilitySoul": "Resonance [Light], when a Light character's skill activates, that character's ATK +15% [MAX: +60%]",
     "Attribute": "Light",
     "AwakenLv3": "Resonance [Light], when a Light character's skill activates, that character's ATK +10% [MAX: +40%]",
@@ -4466,6 +4480,25 @@
     "id": "5070043"
   },
   {
+    "AbilitySoul": "Resonance [Light], other Light characters' skill damage +50%",
+    "Attribute": "Light",
+    "AwakenLv3": "",
+    "AwakenLv5": "Resonance [Light], when a Light character's skill activates, other Light characters' skill damage +10% [MAX: +100%]",
+    "DevNicknames": "fist_0044",
+    "ENName": "Arphident",
+    "EnhanceLv1": "Resonance [Light], when a Light character's skill activates, other Light characters' skill damage +3 ➝ +6% [MAX: +30 ➝ +60%]",
+    "EnhanceLv100": "",
+    "EnhanceLv120": "",
+    "EnhanceLv70": "Resonance [Light], when a Light character's skill activates, other Light characters' skill damage +3% [MAX: +30%]",
+    "EnhanceLv99": "Resonance [Light], when a Light character's skill activates, other Light characters' skill damage +6% [MAX: +60%]",
+    "JPName": "アーフィデント",
+    "MaxATK": "193",
+    "MaxHP": "635",
+    "Rarity": "5",
+    "WeaponSkill": "Resonance [Light], other Light characters' skill damage +100%",
+    "id": "5070044"
+  },
+  {
     "AbilitySoul": "Own light resistance +20%",
     "Attribute": "Dark",
     "AwakenLv3": "While a Dark character's HP is at or below 50%, that character's skill damage +40%",
@@ -5384,6 +5417,20 @@
     "Rarity": "5",
     "WeaponSkill": "Resonance [Any], when battle begins, for every 1% skill gauge by which a party character exceeds its max skill gauge, that character's ATK +1.5% [MAX: +150%]",
     "id": "5090056"
+  },
+  {
+    "AbilitySoul": "Unobtainable",
+    "Attribute": "Dark",
+    "AwakenLv3": "",
+    "AwakenLv5": "",
+    "DevNicknames": "acce_0057",
+    "ENName": "Jet-Black Feathered Robe",
+    "JPName": "漆黒の羽衣",
+    "MaxATK": "100",
+    "MaxHP": "500",
+    "Rarity": "5",
+    "WeaponSkill": "Resonance [Dark], when battle begins, deal damage to Dark characters equating 20% of max HP",
+    "id": "5090057"
   },
   {
     "AbilitySoul": "If self is a Light character, own ATK +5% / If self is a Light character, when party gains power flip damage buff, own ATK +15% [MAX: +45%] / If self is a Light character, every 20 combo, grant power flip damage buff (+25%/10s)",
