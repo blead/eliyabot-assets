@@ -27,7 +27,7 @@
     ENName::: '[Traveler Embracing Dreams]\nLeve',
     leaderSkillName:: "Morning Sun's Departure",
     skillName:: 'Morning Star of Dream that Light Up the Darkness',
-    skillDescription:: "Using the power of darkness and nature, inflict [Dream's Star Beacon] debuff to all enemies + remove 1 buff / Grant party members skill damage buff (+100%/20s)",
+    skillDescription:: "Using the power of darkness and nature, inflict [Dream's Star Brand] debuff to all enemies + remove 1 buff / Grant party members skill damage buff (+100%/20s)",
   },
   wind_spgirl_4anv: {
     ENName::: '[Sword Saint of Stars]\nSilty (Meteor)',

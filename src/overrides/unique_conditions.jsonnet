@@ -54,6 +54,6 @@
     name: "Twin Stellas' Journey",
   },
   '夢の星標': {
-    name: "Dream's Star Beacon",
+    name: "Dream's Star Brand",
   },
 }
