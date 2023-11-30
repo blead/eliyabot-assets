@@ -37,6 +37,7 @@
   },
   light_adventurer_4anv: {
     ENName::: '[Guardian of Courage]\nLight (4th Anniversary)',
+    Obtain:: '[Limited] 4th Anniversary Event',
     leaderSkillName:: 'A Fairy Tale Once Again',
     skillName:: "Dwell in Me, My Friend's Fangs",
     skillDescription:: 'Rush towards the nearest enemy and unleashing all his sword skills dealing thunder damage (40x) / Grant self ATK buff (+250%/20s)',
