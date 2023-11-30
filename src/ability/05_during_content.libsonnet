@@ -1,3 +1,4 @@
+local customAbilityStrings = import './custom_ability_strings.libsonnet';
 local keywords = import './keywords.libsonnet';
 local utils = import './utils.libsonnet';
 
@@ -11,7 +12,7 @@ local utils = import './utils.libsonnet';
     },
 
   parse(abi)::
-    if abi[11] in self then self[abi[11]](abi[:20])
+    if abi[11] in self then self[abi[11]](abi[:25])
     else '<during content %s not defined> ' % abi[11],
 
   map(abi, divisor=1000):: {
@@ -40,6 +41,9 @@ local utils = import './utils.libsonnet';
       else '%s ➝ %s' % [utils.formatZeroSigned(self.minValue), utils.formatZeroSigned(self.value)]
     ),
     contentTargetType: keywords.type(abi[19]),
+    changePowerFlip:
+      if abi[24] in customAbilityStrings then customAbilityStrings[abi[24]]
+      else '<changePowerFlip: %s>' % abi[24],
   },
 
   addStats(mapped)::
@@ -90,5 +94,5 @@ local utils = import './utils.libsonnet';
   '410':: function(abi) 'direct attack damage dealt' + self.addStats(self.map(abi)),
   '411':: function(abi) '%(targetP)s skill damage dealt' % self.map(abi) + self.addStats(self.map(abi)),
   '413':: function(abi) 'power flip damage dealt' + self.addStats(self.map(abi)),
-  '419':: function(abi) 'power flip is enhanced',
+  '419':: function(abi) self.map(abi).changePowerFlip,
 }

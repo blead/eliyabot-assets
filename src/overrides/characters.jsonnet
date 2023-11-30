@@ -21,13 +21,14 @@
     ENName::: '[Traveler of A Kindred Journey]\nNova',
     leaderSkillName:: 'Together Once More Tomorrow',
     skillName:: 'Nova, Like the Twin Stellas',
-    skillDescription:: "Bless allies with the divine protection of his spear, grant light characters [Twin Stellas' Journey] buff / Remove 1 buff from all enemies / Grant party members skill damage buff (+100%/20s)",
+    skillDescription:: "Bless allies with the divine protection of his spear, grant light characters [Twin Stellas' Journey] buff (20s) / Remove 1 buff from all enemies / Grant party members skill damage buff (+100%/20s)",
   },
   stella_copy_4anv: {
     ENName::: '[Traveler Embracing Dreams]\nLeve',
     leaderSkillName:: "Morning Sun's Departure",
     skillName:: 'Morning Star of Dream that Light Up the Darkness',
-    skillDescription:: "Using the power of darkness and nature, inflict [Dream's Star Brand] debuff to all enemies + remove 1 buff / Grant party members skill damage buff (+100%/20s)",
+    skillDescription:: "Using the power of darkness and nature, inflict [Dream's Star Brand] debuff (20s) to all enemies + remove 1 buff / Grant party members skill damage buff (+100%/20s)
+",
   },
   wind_spgirl_4anv: {
     ENName::: '[Sword Saint of Stars]\nSilty (Meteor)',
