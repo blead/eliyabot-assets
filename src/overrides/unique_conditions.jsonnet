@@ -50,4 +50,10 @@
   'ブーケトス': {
     name: 'Bouquet Toss',
   },
+  '双星の旅路': {
+    name: "Twin Stellas' Journey",
+  },
+  '夢の星標': {
+    name: "Dream's Star Beacon",
+  },
 }

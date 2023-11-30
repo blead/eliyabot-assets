@@ -43,7 +43,7 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
     },
 
   parse(abi)::
-    if abi[20] in self then self[abi[20]](abi[:55])
+    if abi[20] in self then self[abi[20]](abi[:58])
     else '<instant content %s not defined> ' % abi[20],
 
   map(abi, divisor=1000):: {
@@ -113,6 +113,9 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
     changeSkill:
       if abi[43] in customAbilityStrings then customAbilityStrings[abi[43]]
       else '<changeSkill: %s>' % abi[43],
+    changePowerFlip:
+      if abi[57] in customAbilityStrings then customAbilityStrings[abi[57]]
+      else '<changePowerFlip: %s>' % abi[57],
     activatesSeparately: abi[45],
   } + uniqueConditions.mixin(abi[41]),
 
@@ -131,7 +134,7 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
     + cooldown(mapped.cooldown),
 
   addStats(mapped)::
-    local minRamp = if std.setMember(mapped.triggerId, ['252', '52', '55', '56']) then 1 else 0;
+    local minRamp = if std.setMember(mapped.triggerId, ['253', '53', '56', '57']) then 1 else 0;
     ' %(valueStrSigned)s%%' % mapped
     + (if mapped.rampTimes > minRamp then ' [MAX: %(rampedValueStrSigned)s%%]' % mapped else '')
     + delay(mapped.delay)
@@ -477,6 +480,7 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
   '538':: function(abi) '%(targetP)s skill damage against enemies with debuffs' % self.map(abi) + self.addStats(self.map(abi)),
   '551':: function(abi) '%(targetP)s skill damage against enemies with water resistance debuff' % self.map(abi) + self.addStats(self.map(abi)),
   '560':: function(abi) '%(targetP)s skill damage against enemies with paralyze/stun debuff' % self.map(abi) + self.addStats(self.map(abi)),
+  '565':: function(abi) '%(targetP)s skill damage against enemies with [%(ucName)s]' % self.map(abi) + self.addStats(self.map(abi)),
   '628':: function(abi) '%(valueStr)s%% of own damage taken is shared equally to %(target)s instead' % self.map(abi),
   // ability skill e.g., hildegarde summoning balls
   '629':: self['536'],
@@ -505,4 +509,7 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
     + delay(self.map(abi).delay)
     + triggerTimes(self.map(abi).rampTimes)
     + cooldown(self.map(abi).cooldown),
+  '720':: function(abi) 'self becomes a Light character during battle',
+  '721':: function(abi) '%(targetP)s skill damage dealt to enemies with [%(ucName)s]' % self.map(abi) + self.addStats(self.map(abi)),
+  '722':: function(abi) self.map(abi).changePowerFlip,
 }

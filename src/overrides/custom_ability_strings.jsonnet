@@ -8,4 +8,6 @@
   ability_skill_fire_dragon_zenith: 'activate special skill (20x)',
   change_skill_guild_front_girl_playable: '[Guild Support] has an additional effect [remove 1 debuff from water characters]',
   change_skill_wirfled_playable_2: "[Flamme Craft]'s skill damage buff is enhanced (+100% ➝ +130%)",
+  override_string_wind_spgirl_4anv: 'power flip is enhanced (20x/3 hits)',
+  change_skill_stella_copy_4anv: '[Morning Star of Dream that Light Up the Darkness] has an additonal dark resistance debuff (-15%/20s)',
 }

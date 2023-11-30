@@ -88,6 +88,7 @@ local utils = import './utils.libsonnet';
     + mapped.doesNotStack,
   '258':: function(abi) '%(targetP)s ATK against that enemy' % self.map(abi) + self.addStats(self.map(abi)),
   '410':: function(abi) 'direct attack damage dealt' + self.addStats(self.map(abi)),
+  '411':: function(abi) '%(targetP)s skill damage dealt' % self.map(abi) + self.addStats(self.map(abi)),
   '413':: function(abi) 'power flip damage dealt' + self.addStats(self.map(abi)),
   '419':: function(abi) 'power flip is enhanced',
 }

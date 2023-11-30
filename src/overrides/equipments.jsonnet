@@ -11,4 +11,13 @@
   acce_0056: {
     ENName: 'Drop Belt',
   },
+  fist_0044: {
+    ENName: 'Arphident',
+  },
+  sword_0078: {
+    ENName: 'Griffe Foncé',
+  },
+  acce_0057: {
+    ENName: 'Jet-Black Feathered Robe',
+  },
 }

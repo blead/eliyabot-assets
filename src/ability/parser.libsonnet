@@ -9,8 +9,8 @@ local openingContent = import '06_opening_content.libsonnet';
 {
   capitalize(line)::
     if line == '' then ''
-    else if std.startsWith(line, '[Main] ') then line[:7] + std.asciiUpper(line[7]) + line[8:]
-    else if std.startsWith(line, '[Unison] ') then line[:9] + std.asciiUpper(line[9]) + line[10:]
+    else if std.startsWith(line, '[Main] ') && std.length(line) > 7 then line[:7] + std.asciiUpper(line[7]) + line[8:]
+    else if std.startsWith(line, '[Unison] ') && std.length(line) > 9 then line[:9] + std.asciiUpper(line[9]) + line[10:]
     else std.asciiUpper(line[0]) + line[1:],
 
   format(lines):: std.join(' / ', std.map(self.capitalize, lines)),
@@ -30,10 +30,10 @@ local openingContent = import '06_opening_content.libsonnet';
       precondition.index(18),
       instantTrigger.index(25),
       instantContent.index(25),
-      instantTrigger.index(80),
-      duringTrigger.index(92),
-      duringContent.index(93),
-      openingContent.index(118),
+      instantTrigger.index(83),
+      duringTrigger.index(95),
+      duringContent.index(96),
+      openingContent.index(121),
     ],
   ),
 
@@ -47,10 +47,10 @@ local openingContent = import '06_opening_content.libsonnet';
       precondition.index(16),
       instantTrigger.index(23),
       instantContent.index(23),
-      instantTrigger.index(78),
-      duringTrigger.index(90),
-      duringContent.index(91),
-      openingContent.index(116),
+      instantTrigger.index(81),
+      duringTrigger.index(93),
+      duringContent.index(94),
+      openingContent.index(119),
     ],
   ),
 
@@ -64,10 +64,10 @@ local openingContent = import '06_opening_content.libsonnet';
       precondition.index(17, mode),
       instantTrigger.index(24, mode),
       instantContent.index(24, mode),
-      instantTrigger.index(79, mode),
-      duringTrigger.index(91, mode),
-      duringContent.index(92, mode),
-      openingContent.index(117, mode),
+      instantTrigger.index(81, mode),
+      duringTrigger.index(94, mode),
+      duringContent.index(95, mode),
+      openingContent.index(120, mode),
     ],
   ),
 
@@ -97,10 +97,10 @@ local openingContent = import '06_opening_content.libsonnet';
       precondition.index(19, mode),
       instantTrigger.index(26, mode),
       instantContent.index(26, mode),
-      instantTrigger.index(81, mode),
-      duringTrigger.index(93, mode),
-      duringContent.index(94, mode),
-      openingContent.index(119, mode),
+      instantTrigger.index(84, mode),
+      duringTrigger.index(96, mode),
+      duringContent.index(97, mode),
+      openingContent.index(122, mode),
     ]
   ),
 
