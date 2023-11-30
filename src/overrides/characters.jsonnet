@@ -1,4 +1,7 @@
 {
+  psycho_reaper_meteor23: {
+    leaderSkillName:: 'Vows of Love',
+  },
   fire_dragon_zenith: {
     ENName::: '[Flame Dragon King]\nWagner (Zenith)',
     leaderSkillName:: 'Prominence Proud',
