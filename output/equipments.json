@@ -5433,6 +5433,45 @@
     "id": "5090057"
   },
   {
+    "AbilitySoul": "Unobtainable",
+    "Attribute": "Fire",
+    "AwakenLv3": "",
+    "AwakenLv5": "",
+    "DevNicknames": "acce_0058",
+    "JPName": "真紅の羽衣",
+    "MaxATK": "100",
+    "MaxHP": "500",
+    "Rarity": "5",
+    "WeaponSkill": "Resonance [Fire], when own skill activates, grant penetration buff (10s)",
+    "id": "5090058"
+  },
+  {
+    "AbilitySoul": "Unobtainable",
+    "Attribute": "Water",
+    "AwakenLv3": "",
+    "AwakenLv5": "",
+    "DevNicknames": "acce_0059",
+    "JPName": "群青の羽衣",
+    "MaxATK": "100",
+    "MaxHP": "500",
+    "Rarity": "5",
+    "WeaponSkill": "Resonance [Water], leader's fever gain from attacks +100%",
+    "id": "5090059"
+  },
+  {
+    "AbilitySoul": "Unobtainable",
+    "Attribute": "Light",
+    "AwakenLv3": "",
+    "AwakenLv5": "",
+    "DevNicknames": "acce_0060",
+    "JPName": "純白の羽衣",
+    "MaxATK": "100",
+    "MaxHP": "500",
+    "Rarity": "5",
+    "WeaponSkill": "Resonance [Light], every 3 Lv1 or Lv2 power flips, combo +6",
+    "id": "5090060"
+  },
+  {
     "AbilitySoul": "If self is a Light character, own ATK +5% / If self is a Light character, when party gains power flip damage buff, own ATK +15% [MAX: +45%] / If self is a Light character, every 20 combo, grant power flip damage buff (+25%/10s)",
     "Attribute": "Light",
     "AwakenLv3": "",
