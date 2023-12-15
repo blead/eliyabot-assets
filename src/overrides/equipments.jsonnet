@@ -20,4 +20,13 @@
   acce_0057: {
     ENName: 'Jet-Black Feathered Robe',
   },
+  acce_0058: {
+    ENName: 'Scarlet Feathered Robe',
+  },
+  acce_0059: {
+    ENName: 'Ultramarine Feathered Robe',
+  },
+  acce_0060: {
+    ENName: 'Snow White Feathered Robe',
+  },
 }
