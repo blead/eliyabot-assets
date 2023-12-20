@@ -92,15 +92,15 @@ local openingContent = import '06_opening_content.libsonnet';
   parseEquipmentEnhancement(abi, mode='enh'):: self.parse(
     abi,
     [
-      precondition.index(5, mode),
-      precondition.index(12, mode),
-      precondition.index(19, mode),
-      instantTrigger.index(26, mode),
-      instantContent.index(26, mode),
-      instantTrigger.index(84, mode),
-      duringTrigger.index(96, mode),
-      duringContent.index(97, mode),
-      openingContent.index(122, mode),
+      precondition.index(6, mode),
+      precondition.index(13, mode),
+      precondition.index(20, mode),
+      instantTrigger.index(27, mode),
+      instantContent.index(27, mode),
+      instantTrigger.index(85, mode),
+      duringTrigger.index(97, mode),
+      duringContent.index(98, mode),
+      openingContent.index(123, mode),
     ]
   ),
 

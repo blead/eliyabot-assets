@@ -512,4 +512,5 @@ local activatesSeparately(cond) = if cond == 'true' then ' (activates separately
   '720':: function(abi) 'self becomes a Light character during battle',
   '721':: function(abi) '%(targetP)s skill damage dealt to enemies with [%(ucName)s]' % self.map(abi) + self.addStats(self.map(abi)),
   '722':: function(abi) self.map(abi).changePowerFlip,
+  '723':: function(abi) '%(targetP)s damage dealt to enemies' % self.map(abi) + self.addStats(self.map(abi)),
 }
