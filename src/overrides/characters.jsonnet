@@ -1,4 +1,48 @@
 {
+  onmyoji_boy: {
+    skillName:: 'Gu Poison Conjuration',
+    skillDescription:: 'Deploying a magic circle around himself for a short while, deal water damage (17.5x/10s) + inflict poison debuff (7500/40s) to enemies entering it / Grant water characters ATK buff (+120%/20s)',
+  },
+  thunder_archer: {
+    skillName:: 'Levin Rainfall',
+    skillDescription:: 'Facing the nearest enemy, call down a rain of thunder arrows from the sky and deal thunder damage (37x) to enemies around [damage amplified on enemies with paralyze/stun debuff (+25%)]',
+  },
+  big_gunner: {
+    skillName:: 'Chaotic Golden Peony Blossom',
+    skillDescription:: 'Throwing out specially made firework orbs to the front, deal thunder damage (37x) to enemies hit and the area around them [damage scales with combo count (+0.5%)]',
+  },
+  gentle_barten: {
+    skillName:: 'Echo Breath',
+    skillDescription:: 'Using powers from the labyrinth, Heal leader (10%) [effect amplified on wind characters (+50%)] / Grant wind characters ATK buff (+125%/15s) / grant allies power flip damage buff (+125%/15s)',
+  },
+  timid_kunoichi_ny21: {
+    skillName:: 'Ninpou Senshi Izuna',
+    skillDescription:: 'Sends the hidden weapons she concealed within her kimono sleeve flying with a whirlwind, dealing wind damage (12x) to all enemies on the field [damage enhanced against bosses (+100%)] / Grant wind characters skill damage buff (+125%/15s)',
+  },
+  waste_armor: {
+    skillName:: 'Apatite Chivalry',
+    skillDescription:: 'Swing her greatsword in front of herself, dealing wind damage (26x) in an area / Grant wind characters thunder resistance buff (+10%/40s) + ATK buff (+100%/20s) + remove 1 debuff',
+  },
+  lightbullet_wiz_vt21: {
+    skillName:: 'Sweet Shock-o-light',
+    skillDescription:: "Sending a fan-shaped volley of love's destructive magic before her, deal light damage (12x) to enemies hit / Heal party members' HP (8%) [effect amplified on light characters (+50%)] / Grant self ATK buff (+100%/15s) & ability damage buff (+150%/15s)",
+  },
+  crystal_swordman: {
+    skillName:: 'Reflection Overlay',
+    skillDescription:: 'Releasing the energy in his crystallized arm, deal light damage (15x) to enemies in front / Grant self ATK buff (+100%/20s) & ability damage buff (+200%/20s)',
+  },
+  resistance_princess_smr21: {
+    skillName:: 'Astral Spark',
+    skillDescription:: 'Exploding numerous light orbs, deal light damage (12x) to the field + inflict stun (3s) for a short while / Grant light characters ability damage buff (+150%/15s)',
+  },
+  noble_sorceress: {
+    skillName:: 'Ergo Eraser',
+    skillDescription:: 'Reversing the law of cause and effect, heal all party members (10%) [effect amplified on dark characters (+50%)] + grant skill damage buff (+125%/20s) / Remove 1 debuff from all combatants',
+  },
+  psychic_shouta: {
+    skillName:: 'Voidbreak Burst',
+    skillDescription:: 'Crush the area around the nearest enemy with immense gravity, dealing dark damage (36x) and inflict slow debuff to enemies hit (20s)',
+  },
   psycho_reaper_meteor23: {
     leaderSkillName:: 'Vows of Love',
   },

@@ -9,6 +9,29 @@ SPREADSHEET_ID = os.environ.get("SPREADSHEET_ID")
 CHARS_JSON = os.environ.get("CHARS_JSON", "processed/playable_characters.json")
 EQUIPS_JSON = os.environ.get("EQUIPS_JSON", "processed/playable_equipments.json")
 
+CHAR_OVERRIDES = {
+    "onmyoji_boy": {"Ability3", "Skill", "SkillWait"},
+    "thunder_archer": {"Ability3", "Skill", "SkillWait"},
+    "big_gunner": {"Ability3", "Skill", "SkillWait"},
+    "gentle_barten": {"Ability3", "Skill", "SkillWait"},
+    "timid_kunoichi_ny21": {"Ability3", "Skill", "SkillWait"},
+    "waste_armor": {"Ability3", "Skill", "SkillWait"},
+    "lightbullet_wiz_vt21": {"Ability3", "Skill", "SkillWait"},
+    "crystal_swordman": {"Ability3", "Skill", "SkillWait"},
+    "resistance_princess_smr21": {"Ability3", "Skill", "SkillWait"},
+    "noble_sorceress": {"Ability3", "Skill", "SkillWait"},
+    "psychic_shouta": {"Ability3", "Skill", "SkillWait"},
+}
+
+EQUIP_OVERRIDES = {
+    "axe_0042_raid": {"EnhanceLv100"},
+    "sword_0073_raid": {"EnhanceLv100"},
+    "acce_0047": {"EnhanceLv100"},
+    "shield_0032": {"EnhanceLv100"},
+    "fist_0044": {"EnhanceLv100"},
+    "gun_0020": {"EnhanceLv100"},
+}
+
 ATTRIBUTE_EN_TO_JP = {
     "Fire": "火",
     "Water": "水",
@@ -232,7 +255,10 @@ def update_chars(sheet, spreadsheet_id):
                         col_without_spaces = col.replace(" ", "")
                         if (
                             col_without_spaces in devname_to_char[devname] and 
-                            (row[colidx] == "" or row[notesidx] == "(auto-generated)")
+                            (
+                                row[colidx] == "" or row[notesidx] == "(auto-generated)" or
+                                (devname in CHAR_OVERRIDES and col_without_spaces in CHAR_OVERRIDES[devname])
+                            )
                         ):
                             updated_value = devname_to_char[devname][col_without_spaces]
                             if col_without_spaces == "Attribute":
@@ -331,7 +357,10 @@ def update_equips(sheet, spreadsheet_id):
                         col_without_spaces = col.replace(" ", "")
                         if (
                             col_without_spaces in devname_to_equip[devname] and 
-                            (row[colidx] == "" or row[notesidx] == "(auto-generated)")
+                            (
+                                row[colidx] == "" or row[notesidx] == "(auto-generated)" or
+                                (devname in EQUIP_OVERRIDES and col_without_spaces in EQUIP_OVERRIDES[devname])
+                            )
                         ):
                             updated_value = devname_to_equip[devname][
                                 col_without_spaces
