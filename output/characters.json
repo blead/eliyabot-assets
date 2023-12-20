@@ -1379,7 +1379,7 @@
     "Race": "Human / Youkai",
     "Rarity": 5,
     "Role": "Support",
-    "Skill": "[紫水蠱毒の如し]\n自身の周囲に呪いの魔法陣を展開し、しばらくの間、近づいた敵に水ダメージ ＋ 毒効果 ／ 水属性キャラに攻撃力アップ効果",
+    "Skill": "[Gu Poison Conjuration]\nDeploying a magic circle around himself for a short while, deal water damage (17.5x/10s) + inflict poison debuff (7500/40s) to enemies entering it / Grant water characters ATK buff (+120%/20s)",
     "SkillIcon": "atk_surround",
     "SkillRange": [
       "1",
@@ -2811,7 +2811,7 @@
     "Race": "Human",
     "Rarity": 5,
     "Role": "Bow",
-    "Skill": "[レヴィン・レインフォール]\n最も近い敵に向かって天高く打ち上げた雷矢の雨を降らせ、その周囲の敵に雷ダメージ【マヒ・スタン効果中の敵へのダメージアップ】",
+    "Skill": "[Levin Rainfall]\nFacing the nearest enemy, call down a rain of thunder arrows from the sky and deal thunder damage (37x) to enemies around [damage amplified on enemies with paralyze/stun debuff (+25%)]",
     "SkillIcon": "atk_nearest",
     "SkillRange": [
       "1",
@@ -2913,7 +2913,7 @@
     "Race": "Human",
     "Rarity": 5,
     "Role": "Bow",
-    "Skill": "[金色牡丹乱咲]\n前方に特製の花火玉を打ち出し、命中した敵とその周囲に雷ダメージ【コンボ数に応じてダメージアップ】 ",
+    "Skill": "[Chaotic Golden Peony Blossom]\nThrowing out specially made firework orbs to the front, deal thunder damage (37x) to enemies hit and the area around them [damage scales with combo count (+0.5%)]",
     "SkillIcon": "atk_front",
     "SkillRange": [
       "1",
@@ -4141,7 +4141,7 @@
     "Race": "Human",
     "Rarity": 5,
     "Role": "Special",
-    "Skill": "[エコー・ブレス]\n迷宮の遺物の力により、リーダーのHPを回復【属性「風」に対して効果アップ】 ／ 風属性キャラと風属性マルチボールに攻撃力アップ効果 ／ パーティとマルチボールにパワーフリップダメージアップ効果",
+    "Skill": "[Echo Breath]\nUsing powers from the labyrinth, Heal leader (10%) [effect amplified on wind characters (+50%)] / Grant wind characters ATK buff (+125%/15s) / grant allies power flip damage buff (+125%/15s)",
     "SkillIcon": "str_up",
     "SkillRange": [
       "0",
@@ -4345,7 +4345,7 @@
     "Race": "Human",
     "Rarity": 5,
     "Role": "Sword",
-    "Skill": "[忍法千刺イヅナ]\n振袖に仕込んだ暗器を竜巻に乗せて飛ばし、フィールド全体の敵に風ダメージ【ボスに対してダメージアップ】 ／ 風属性キャラと風属性マルチボールにスキルダメージアップ効果",
+    "Skill": "[Ninpou Senshi Izuna]\nSends the hidden weapons she concealed within her kimono sleeve flying with a whirlwind, dealing wind damage (12x) to all enemies on the field [damage enhanced against bosses (+100%)] / Grant wind characters skill damage buff (+125%/15s)",
     "SkillIcon": "atk_field",
     "SkillRange": [
       "1",
@@ -4753,7 +4753,7 @@
     "Race": "Human",
     "Rarity": 5,
     "Role": "Sword",
-    "Skill": "[アパタイト・シヴァルリー]\n前方に大剣を振るい、その周囲の敵に風ダメージ ／ 風属性キャラと風属性マルチボールに攻撃力アップ ＋ 雷属性耐性アップ効果 ＋ 弱体効果を1つ回復",
+    "Skill": "[Apatite Chivalry]\nSwing her greatsword in front of herself, dealing wind damage (26x) in an area / Grant wind characters thunder resistance buff (+10%/40s) + ATK buff (+100%/20s) + remove 1 debuff",
     "SkillIcon": "atk_front",
     "SkillRange": [
       "1",
@@ -5778,7 +5778,7 @@
     "Race": "Human / Sprite",
     "Rarity": 5,
     "Role": "Bow",
-    "Skill": "[スウィート・ショコライト]\n自身の前方に扇状に恋の破壊魔法を発射し、命中した敵に光ダメージ ／ パーティキャラとマルチボールのHPを回復【属性「光」に対して効果アップ】 ／ 自身に攻撃力アップ ＋ アビリティダメージアップ効果",
+    "Skill": "[Sweet Shock-o-light]\nSending a fan-shaped volley of love's destructive magic before her, deal light damage (12x) to enemies hit / Heal party members' HP (8%) [effect amplified on light characters (+50%)] / Grant self ATK buff (+100%/15s) & ability damage buff (+150%/15s)",
     "SkillIcon": "atk_front",
     "SkillRange": [
       "1",
@@ -5812,7 +5812,7 @@
     "Race": "Human",
     "Rarity": 5,
     "Role": "Sword",
-    "Skill": "[リフレクション・オーバーレイ]\n結晶化した腕に込められたエネルギーを解放し、自身の前方の敵に光ダメージ ／ 自身に攻撃力アップ ＋ アビリティダメージアップ効果",
+    "Skill": "[Reflection Overlay]\nReleasing the energy in his crystallized arm, deal light damage (15x) to enemies in front / Grant self ATK buff (+100%/20s) & ability damage buff (+200%/20s)",
     "SkillIcon": "atk_front",
     "SkillRange": [
       "1",
@@ -5880,7 +5880,7 @@
     "Race": "Human / Sprite",
     "Rarity": 5,
     "Role": "Sword",
-    "Skill": "[アストラルスパーク]\n無数のまばゆい光の玉を爆発させ、フィールド全体に光ダメージ ＋ 少しの間、スタン効果 ／ 光属性キャラと光属性マルチボールにアビリティダメージアップ効果",
+    "Skill": "[Astral Spark]\nExploding numerous light orbs, deal light damage (12x) to the field + inflict stun (3s) for a short while / Grant light characters ability damage buff (+150%/15s)",
     "SkillIcon": "atk_field",
     "SkillRange": [
       "1",
@@ -7110,7 +7110,7 @@
     "Race": "Human / Sprite",
     "Rarity": 5,
     "Role": "Support",
-    "Skill": "[エルゴイレイザー]\n因果律を逆転させ、パーティキャラとマルチボールのHPを回復【属性「闇」に対して効果アップ】 ＋ スキルダメージアップ効果 ／ パーティキャラ・マルチボールと参戦者のパーティキャラの弱体効果を1つ回復",
+    "Skill": "[Ergo Eraser]\nReversing the law of cause and effect, heal all party members (10%) [effect amplified on dark characters (+50%)] + grant skill damage buff (+125%/20s) / Remove 1 debuff from all combatants",
     "SkillIcon": "heal",
     "SkillRange": [
       "0",
@@ -7314,7 +7314,7 @@
     "Race": "Human",
     "Rarity": 5,
     "Role": "Special",
-    "Skill": "[ボイドブレイク・バースト]\n最も近い敵を中心とした空間を巨大な重力で押しつぶし、その周囲の敵に闇ダメージ ＋ 鈍足効果",
+    "Skill": "[Voidbreak Burst]\nCrush the area around the nearest enemy with immense gravity, dealing dark damage (36x) and inflict slow debuff to enemies hit (20s)",
     "SkillIcon": "atk_nearest",
     "SkillRange": [
       "1",
