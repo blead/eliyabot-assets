@@ -5,6 +5,7 @@ on:
     paths-ignore:
     - 'output/**'
     - 'processed/**'
+    - '.github/scripts/**'
 
 jobs:
   wf-assets:

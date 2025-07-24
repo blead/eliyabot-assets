@@ -10,12 +10,13 @@ CHARS_JSON = os.environ.get("CHARS_JSON", "processed/playable_characters.json")
 EQUIPS_JSON = os.environ.get("EQUIPS_JSON", "processed/playable_equipments.json")
 
 MANUAL_OVERRIDES = {
-    "fire_dragon_zenith": {"OtherCommonNames": "ZWagner, ZVagner, Zenith Wagner, Zenith Vagner"},
+    "amulet_bosslady": {"OtherCommonNames": "Lanmei"},
     "dryad_hw23": {"OtherCommonNames": "HChalua, HChallua, HCharua, Halloween Chalua, Halloween Challua, Halloween Charua"},
+    "fire_dragon_zenith": {"OtherCommonNames": "ZWagner, ZVagner, Zenith Wagner, Zenith Vagner"},
     "light_adventurer_4anv": {"OtherCommonNames": "ALight, Anni Light, Anniv Light, Anniversary Light"},
     "mob_jiguza_playable": {"OtherCommonNames": "Jiguza"},
-    "wind_spgirl_4anv": {"OtherCommonNames": "MSilty, MCeltie, Meteor Silty, Meteor Celtie"},
     "stella_copy_4anv": {"OtherCommonNames": "Reve"},
+    "wind_spgirl_4anv": {"OtherCommonNames": "MSilty, MCeltie, Meteor Silty, Meteor Celtie"},
 }
 
 CHAR_OVERRIDES = {
