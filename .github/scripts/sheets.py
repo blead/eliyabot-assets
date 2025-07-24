@@ -9,6 +9,15 @@ SPREADSHEET_ID = os.environ.get("SPREADSHEET_ID")
 CHARS_JSON = os.environ.get("CHARS_JSON", "processed/playable_characters.json")
 EQUIPS_JSON = os.environ.get("EQUIPS_JSON", "processed/playable_equipments.json")
 
+MANUAL_OVERRIDES = {
+    "fire_dragon_zenith": {"OtherCommonNames": "ZWagner, ZVagner, Zenith Wagner, Zenith Vagner"},
+    "dryad_hw23": {"OtherCommonNames": "HChalua, HChallua, HCharua, Halloween Chalua, Halloween Challua, Halloween Charua"},
+    "light_adventurer_4anv": {"OtherCommonNames": "ALight, Anni Light, Anniv Light, Anniversary Light"},
+    "mob_jiguza_playable": {"OtherCommonNames": "Jiguza"},
+    "wind_spgirl_4anv": {"OtherCommonNames": "MSilty, MCeltie, Meteor Silty, Meteor Celtie"},
+    "stella_copy_4anv": {"OtherCommonNames": "Reve"},
+}
+
 CHAR_OVERRIDES = {
     "onmyoji_boy": {"Ability3", "Skill", "SkillWait"},
     "thunder_archer": {"Ability3", "Skill", "SkillWait"},
@@ -253,7 +262,11 @@ def update_chars(sheet, spreadsheet_id):
 
                     for colidx, col in enumerate(cols):
                         col_without_spaces = col.replace(" ", "")
-                        if (
+                        updated_value = str(row[colidx])
+
+                        if devname in MANUAL_OVERRIDES and col_without_spaces in MANUAL_OVERRIDES[devname]:
+                            updated_value = MANUAL_OVERRIDES[devname][col_without_spaces]
+                        elif (
                             col_without_spaces in devname_to_char[devname] and 
                             (
                                 row[colidx] == "" or row[notesidx] == "(auto-generated)" or
@@ -264,14 +277,14 @@ def update_chars(sheet, spreadsheet_id):
                             if col_without_spaces == "Attribute":
                                 updated_value = ATTRIBUTE_EN_TO_JP[updated_value]
                             
-                            if row[colidx] != str(updated_value):
-                                updated_ranges.append(
-                                    {
-                                        "range": f"'{sheet_name}'!{chr(ord('A')+colidx)}{rownum}",
-                                        "values": [[updated_value]],
-                                    }
-                                )
-                                updated_cols.append(col_without_spaces)
+                        if row[colidx] != str(updated_value):
+                            updated_ranges.append(
+                                {
+                                    "range": f"'{sheet_name}'!{chr(ord('A')+colidx)}{rownum}",
+                                    "values": [[updated_value]],
+                                }
+                            )
+                            updated_cols.append(col_without_spaces)
 
                     if updated_cols:
                         logging.info(f"UPDATE:{devname}:{','.join(updated_cols)}")
